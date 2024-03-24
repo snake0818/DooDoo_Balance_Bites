@@ -66,6 +66,9 @@
     .locked{
       background-color: grey;
     }
+    .leave {
+      background-color: red;
+    }
   </style>
 </head>
 
@@ -80,7 +83,9 @@
     <div class="input-group">
       <div class="input-group-text">操作區域</div>
       <button type="button" class="btn btn-success" id="cleanCookie">清除緩存</button>
-      <input class="btn-check" type="checkbox" value="" id="unlock">
+      <input class="btn-check" type="checkbox" id="comfirm" checked>
+      <label class="btn btn-outline-info" for="comfirm">防止誤觸</label>
+      <input class="btn-check" type="checkbox" id="unlock">
       <label class="btn btn-outline-danger" for="unlock">解鎖模式</label>
     </div>
   </div>

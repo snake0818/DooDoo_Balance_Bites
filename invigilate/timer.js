@@ -243,7 +243,7 @@ document.getElementById("cleanCookie").addEventListener("click", function () {
   }).then((result) => {
     if (result.isConfirmed) {
       // 將 cookie 的到期日期設為過去的時間，從而清除所有 cookie
-      document.cookie = "info=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/website/invigilate/;";
+      document.cookie = "info=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/website/invigilate;";
       cleanView();
     }
   })

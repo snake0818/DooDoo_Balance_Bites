@@ -46,6 +46,17 @@ const colors = [
 // 設置
 const colNum = timeRowText.length;
 const colCells = 4;
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
 
 // 標題、時程表設置
 document.querySelector('#content thead th').colSpan = 2 + (colNum - 1) * colCells;
@@ -81,7 +92,6 @@ timeCourse.forEach((item, index) => {
   contentTb.appendChild(row);
 });
 if (rowspan > 0) { contentTb.lastChild.previousSibling.cells[0].rowSpan = rowspan + 1; }
-
 // 內容設置
 const trlist = contentTb.querySelectorAll('tr');
 trlist.forEach((tr, index) => {
@@ -122,7 +132,7 @@ trlist.forEach((tr, index) => {
     }
   })
 })
-
+// 標記時間
 function showTimer(element) {
   // 取得當前時間
   const now = new Date();
@@ -132,6 +142,7 @@ function showTimer(element) {
   element.textContent = `${hours}:${minutes}`;
   saveInfoInCookie();
 }
+// 存入cookie
 function saveInfoInCookie() {
   var dataToStore = []
   clickAbleElements.forEach((element, index) => {
@@ -148,6 +159,7 @@ function saveInfoInCookie() {
   // 將資料存入 Cookie
   document.cookie = "info=" + dataString;
 }
+// 讀取cookie
 function loadCookieData() {
   var cookieString = document.cookie; // 獲取包含所有 Cookie 的字串
   // 將字串分割成各個 Cookie
@@ -167,17 +179,29 @@ function loadCookieData() {
     })
   }
 }
+// 清除當前頁面
 function cleanView() {
   clickAbleElements.forEach(element => {
     element.classList = 'clickAble';
     element.querySelector('.in').textContent = '';
     element.querySelector('.out').textContent = '';
   })
+  Toast.fire({ icon: "success", title: "成功清除" });
 }
 
+// *********************** 網頁執行 ***********************
 
+// 取得所有room元素
+const roomElements = document.querySelectorAll('.room');
+roomElements.forEach((element) => {
+  element.addEventListener('click', () => {    
+    element.classList.toggle('leave');
+  })
+})
+// 取得所有內容元素
 const clickAbleElements = document.querySelectorAll('.clickAble');
 loadCookieData();
+// 迭代每個元素建立點擊事件監聽
 clickAbleElements.forEach((element) => {
   element.addEventListener('click', () => {
     const number = element.querySelector('.number')
@@ -196,43 +220,56 @@ clickAbleElements.forEach((element) => {
             elementIn.textContent = ''; elementOut.textContent = '';
             element.classList.remove('locked');
             saveInfoInCookie();
+            Toast.fire({ icon: "success", title: "成功清除" });
           }
         })
       }
-    }
-    else {
+    } else {
+      const isSafe = document.getElementById('comfirm').checked;
       if (!element.classList.contains("selected")) {
-        swal.fire({
-          title: "開始監考",
-          icon: "warning",
-          text: `您確定要對 ${number.textContent} 執行此操作嗎？`,
-          showCancelButton: true,
-          focusCancel: true,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            element.classList.add('selected');
-            showTimer(elementIn);
-          }
-        })
+        if (isSafe) {
+          swal.fire({
+            title: "開始監考",
+            icon: "warning",
+            text: `您確定要對 ${number.textContent} 執行此操作嗎？`,
+            showCancelButton: true,
+            focusCancel: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              element.classList.add('selected');
+              showTimer(elementIn);
+            }
+          })
+        } else {
+          element.classList.add('selected');
+          showTimer(elementIn);
+        }
       } else {
-        swal.fire({
-          title: "結束監考",
-          icon: "warning",
-          text: `您確定要對 ${number.textContent} 執行此操作嗎？`,
-          showCancelButton: true,
-          focusCancel: true,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            element.classList.remove('selected');
-            element.classList.add('locked');
-            showTimer(elementOut);
-          }
-        })
+        if (isSafe) {
+          swal.fire({
+            title: "結束監考",
+            icon: "warning",
+            text: `您確定要對 ${number.textContent} 執行此操作嗎？`,
+            showCancelButton: true,
+            focusCancel: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              element.classList.remove('selected');
+              element.classList.add('locked');
+              showTimer(elementOut);
+            }
+          })
+        } else {
+          element.classList.remove('selected');
+          element.classList.add('locked');
+          showTimer(elementOut);
+        }
       }
     }
   });
 });
-document.getElementById("cleanCookie").addEventListener("click", function () {
+// 清除緩存按鈕點擊事件
+document.getElementById("cleanCookie").addEventListener("click", () => {
   swal.fire({
     title: "清空網站緩存",
     icon: "warning",

@@ -41,7 +41,8 @@ const colors = [
   "#CCBBFF",
   "#FFCCCC",
   "#FFCCCC",
-]
+];
+const estimatedTimes = [20, 20, 5, 6, 40, 40, 40, 40, 25, 20];
 
 // 設置
 const colNum = timeRowText.length;
@@ -132,14 +133,21 @@ trlist.forEach((tr, index) => {
     }
   })
 })
+// 將格式化的時間設置為相應元素的 textContent
+function formatTime(time) {
+  const hours = time.getHours().toString().padStart(2, '0');
+  const minutes = time.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
+}
 // 標記時間
-function showTimer(element) {
-  // 取得當前時間
+function showTimer(rowIndex, element0, element1) {
+  // 寫入當前時間
   const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  // 將格式化的時間設置為相應元素的 textContent
-  element.textContent = `${hours}:${minutes}`;
+  element0.textContent = formatTime(now);
+  // 寫入預計時間
+  const estimated = new Date(now.getTime() + estimatedTimes[rowIndex] * 60000);
+  element1.textContent = formatTime(estimated);
+  // 更新緩存
   saveInfoInCookie();
 }
 // 存入cookie
@@ -194,7 +202,7 @@ function cleanView() {
 // 取得所有room元素
 const roomElements = document.querySelectorAll('.room');
 roomElements.forEach((element) => {
-  element.addEventListener('click', () => {    
+  element.addEventListener('click', () => {
     element.classList.toggle('leave');
   })
 })
@@ -227,6 +235,7 @@ clickAbleElements.forEach((element) => {
     } else {
       const isSafe = document.getElementById('comfirm').checked;
       if (!element.classList.contains("selected")) {
+        const tr = (element.parentElement.id).replace('r', '');
         if (isSafe) {
           swal.fire({
             title: "開始監考",
@@ -237,12 +246,12 @@ clickAbleElements.forEach((element) => {
           }).then((result) => {
             if (result.isConfirmed) {
               element.classList.add('selected');
-              showTimer(elementIn);
+              showTimer(tr, elementIn, elementOut);
             }
           })
         } else {
           element.classList.add('selected');
-          showTimer(elementIn);
+          showTimer(tr, elementIn, elementOut);
         }
       } else {
         if (isSafe) {
@@ -256,13 +265,11 @@ clickAbleElements.forEach((element) => {
             if (result.isConfirmed) {
               element.classList.remove('selected');
               element.classList.add('locked');
-              showTimer(elementOut);
             }
           })
         } else {
           element.classList.remove('selected');
           element.classList.add('locked');
-          showTimer(elementOut);
         }
       }
     }

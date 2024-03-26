@@ -133,6 +133,7 @@ trlist.forEach((tr, index) => {
     }
   })
 })
+
 // 將格式化的時間設置為相應元素的 textContent
 function formatTime(time) {
   const hours = time.getHours().toString().padStart(2, '0');
@@ -186,15 +187,6 @@ function loadCookieData() {
       if (Data[index].outText) element.querySelector('.out').textContent = Data[index].outText;
     })
   }
-}
-// 清除當前頁面
-function cleanView() {
-  clickAbleElements.forEach(element => {
-    element.classList = 'clickAble';
-    element.querySelector('.in').textContent = '';
-    element.querySelector('.out').textContent = '';
-  })
-  Toast.fire({ icon: "success", title: "成功清除" });
 }
 
 // *********************** 網頁執行 ***********************
@@ -286,9 +278,16 @@ document.getElementById("cleanCookie").addEventListener("click", () => {
     focusCancel: true,
   }).then((result) => {
     if (result.isConfirmed) {
+      const path = window.location.pathname;
+      const cleanedPath = path.endsWith('/') ? path.slice(0, -1) : path;
       // 將 cookie 的到期日期設為過去的時間，從而清除所有 cookie
-      document.cookie = "info=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/website/invigilate;";
-      cleanView();
+      document.cookie = `info=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${cleanedPath};`;
+      clickAbleElements.forEach(element => {
+        element.classList = 'clickAble';
+        element.querySelector('.in').textContent = '';
+        element.querySelector('.out').textContent = '';
+      })
+      Toast.fire({ icon: "success", title: "成功清除" });
     }
   })
 });

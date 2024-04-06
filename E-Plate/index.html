@@ -103,7 +103,7 @@
     // 監聽按鈕點擊事件
     $('[id^=btn]').click(function () {
       var gameId = $(this).attr('id').replace('btn', ''); // 提取按鈕的ID中的遊戲編號
-      $('#game').attr('src', '/views/game' + gameId + '.html'); // 設置iframe的src屬性為相應的遊戲地址
+      $('#game').attr('src', '/website/E-Plate/views/game' + gameId + '.html'); // 設置iframe的src屬性為相應的遊戲地址
       $('#game').removeClass('d-none'); // 移除 d-none 類以顯示 iframe
     });
   })

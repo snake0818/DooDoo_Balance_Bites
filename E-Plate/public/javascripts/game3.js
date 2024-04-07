@@ -35,7 +35,7 @@ const gameStart = {
     // 定義互動事件
     screen.on('pointerdown', (pointer) => {
       if (!rumor) {
-        const types = Object.keys(foods);
+        const types = Object.keys(foodset);
         const foodType = foodlist[index - 1].split(/[0-9]|1[0-9]+/)[0];
         const typeIndex = types.indexOf(foodType);
         rumor = this.add.image(0.5 * w, 0.8 * h, `rumor${typeIndex}`).setDisplaySize(4.31 * imageSize, imageSize);

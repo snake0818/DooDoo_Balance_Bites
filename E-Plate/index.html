@@ -111,7 +111,7 @@
   // 監聽 iframe 的 src 屬性變化事件
   document.getElementById('game').addEventListener('load', function () {
     // 檢查新的 src 是否為根路徑 '/'
-    if (this.contentWindow.location.pathname === '/website/E-Plate/') {
+    if (this.contentWindow.location.pathname === '/') {
       // 清除先前的內容
       this.contentWindow.document.body.innerHTML = '';
       document.getElementById('game').classList.add('d-none');

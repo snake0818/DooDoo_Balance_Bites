@@ -143,7 +143,12 @@ const dragEvent = (scene, GameId, regions, userAnswer, colorSet = null) => {
     }
 
     // 檢驗答案，都數量及答案正確則結束遊戲
-    if (checkAnswer(scene, type, userAnswer, gameObject, place, colorSet)) { endgame(scene, userAnswer); }
+    if (place != null && type != null) {
+      if (checkAnswer(scene, type, userAnswer, gameObject, place, colorSet)) { endgame(scene, userAnswer); }
+    } else {
+      gameObject.x = gameObject.prevX;
+      gameObject.y = gameObject.prevY;
+    }
   });
 }
 

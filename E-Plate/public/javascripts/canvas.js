@@ -215,20 +215,20 @@ const endView = (scene) => {
   again.on('pointerup', () => { scene.scene.start('gameStart'); })
 }
 // 隨機食物
-const randomFood = () => {
+const randomFood = (foodtypes = foodTypes) => {
   // 隨機選擇一個食物類型及食物編號
-  const randomType = foodTypes[Math.round(Math.random() * (foodTypes.length - 1))];
+  const randomType = foodtypes[Math.round(Math.random() * (foodtypes.length - 1))];
   const randomFoodNumber = Math.round(Math.random() * foodset[randomType]);
   const randomFoo = randomType + randomFoodNumber;
   return randomFoo;
 }
 // 隨機取用食物圖
-const getRandomFoods = (count, set = null) => {
+const getRandomFoods = (count, set = null, restriction = null) => {
   const selectedFoods = [];
   while (selectedFoods.length < count) {
-    const ramFoo = randomFood();
+    const ramFoo = restriction ? randomFood(restriction) : randomFood();
     // 檢查沒有重複，沒有則push進selectedFoods
-    if (!selectedFoods.includes(ramFoo)) { selectedFoods.push(ramFoo); }
+    if (ramFoo && !selectedFoods.includes(ramFoo)) { selectedFoods.push(ramFoo); }
 
     // 食物清單條件設置，確保非限定不會出現
     if (set) {
@@ -239,7 +239,7 @@ const getRandomFoods = (count, set = null) => {
       if (!isCorrect) { selectedFoods.length = 0; };
     } else {
       // 檢查六大類食物都至少有1個
-      if (selectedFoods.length === count) {
+      if (selectedFoods.length === count && numOfFood >= 6) {
         const typesSet = new Set(selectedFoods.map(food => food.replace(/[0-9]|1[0-9]/g, '')));
         if (typesSet.size !== foodTypes.length) { selectedFoods.length = 0; };
       }

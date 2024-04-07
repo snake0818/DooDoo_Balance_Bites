@@ -6,6 +6,7 @@ const colorset = {
   i_d: ['vegetable4', 'vegetable10', 'fruit10',],
 };
 let userAnswer = { red: [], gre: [], whi: [], o_y: [], i_d: [] };
+const restriction = ['vegetable', 'fruit'];
 
 const gameStart = {
   key: 'gameStart',
@@ -21,9 +22,9 @@ const gameStart = {
   create: function () {
 
     // /************************************************ 物件設置部分 ************************************************/
-    let foodlist = getRandomFoods(numOfFood, colorset);
+    const foodlist = getRandomFoods(numOfFood, colorset, restriction);
     const foodArr = [];
-    
+
     // 食物分類區域
     const humanBody = this.add.image(cx / 1.4, cy * 1.1, 'body');
     const pw = humanBody.width;

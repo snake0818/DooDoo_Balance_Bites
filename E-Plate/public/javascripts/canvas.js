@@ -9,9 +9,9 @@ const shelfWidth = 0.15 * w; // 食物架寬度
 const shelfHeight = 0.98 * h; // 食物架高度
 const classFontSize = 0.03 * w; // 文字大小
 
-const foods = { nut: 10, milk: 8, meat: 9, vegetable: 13, fruit: 13, grain: 10 };
-// 取得所有 foods 的鍵(食物類型)
-const foodTypes = Object.keys(foods);
+const foodset = { nut: 9, milk: 7, meat: 8, vegetable: 12, fruit: 12, grain: 9 };
+// 取得所有 foodset 的鍵(食物類型)
+const foodTypes = Object.keys(foodset);
 
 // 預載入資料
 const GeneralPreload = (scene) => {
@@ -29,7 +29,6 @@ const GeneralPreload = (scene) => {
   scene.load.image('nut6', '../public/images/foods/nuts/nut6.png');
   scene.load.image('nut7', '../public/images/foods/nuts/nut7.png');
   scene.load.image('nut8', '../public/images/foods/nuts/nut8.png');
-  scene.load.image('nut9', '../public/images/foods/nuts/nut9.png');
   scene.load.image('milk0', '../public/images/foods/milks/milk0.png');
   scene.load.image('milk1', '../public/images/foods/milks/milk1.png');
   scene.load.image('milk2', '../public/images/foods/milks/milk2.png');
@@ -48,6 +47,7 @@ const GeneralPreload = (scene) => {
   scene.load.image('meat7', '../public/images/foods/meats/meat7.png');
   scene.load.image('meat8', '../public/images/foods/meats/meat8.png');
   scene.load.image('meat9', '../public/images/foods/meats/meat9.png');
+  scene.load.image('meat10', '../public/images/foods/meats/meat10.png');
   scene.load.image('vegetable0', '../public/images/foods/vegetables/vegetable0.png');
   scene.load.image('vegetable1', '../public/images/foods/vegetables/vegetable1.png');
   scene.load.image('vegetable2', '../public/images/foods/vegetables/vegetable2.png');
@@ -217,8 +217,8 @@ const endView = (scene) => {
 // 隨機食物
 const randomFood = () => {
   // 隨機選擇一個食物類型及食物編號
-  const randomType = foodTypes[Math.floor(Math.random() * foodTypes.length)];
-  const randomFoodNumber = Math.floor(Math.random() * foods[randomType]);
+  const randomType = foodTypes[Math.round(Math.random() * foodTypes.length)];
+  const randomFoodNumber = Math.round(Math.random() * foodset[randomType]);
   const randomFoo = randomType + randomFoodNumber;
   return randomFoo;
 }
@@ -295,6 +295,6 @@ const checkAnswer = (scene, method, Arraies, foodObject, place, colorSet = null)
       WrnogView(scene);
     }
   }
-  console.log(Arraies);
+  // console.log(Arraies);
   return false;
 }

@@ -9,7 +9,7 @@ const shelfWidth = 0.15 * w; // 食物架寬度
 const shelfHeight = 0.98 * h; // 食物架高度
 const classFontSize = 0.03 * w; // 文字大小
 
-const foodset = { nut: 9, milk: 7, meat: 8, vegetable: 12, fruit: 12, grain: 9 };
+const foodset = { nut: 8, milk: 7, meat: 8, vegetable: 12, fruit: 12, grain: 9 };
 // 取得所有 foodset 的鍵(食物類型)
 const foodTypes = Object.keys(foodset);
 

@@ -27,7 +27,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item"> <a class="nav-link" href="/">首頁</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/website/E-Plate/">首頁</a></li>
         </ul>
       </div>
     </div>
@@ -111,7 +111,7 @@
   // 監聽 iframe 的 src 屬性變化事件
   document.getElementById('game').addEventListener('load', function () {
     // 檢查新的 src 是否為根路徑 '/'
-    if (this.contentWindow.location.pathname === '/') {
+    if (this.contentWindow.location.pathname === '/website/E-Plate/') {
       // 清除先前的內容
       this.contentWindow.document.body.innerHTML = '';
       document.getElementById('game').classList.add('d-none');

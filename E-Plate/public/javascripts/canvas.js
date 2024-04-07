@@ -4,7 +4,7 @@ const cx = w / 2;
 const cy = h / 2;
 // console.log(`width: ${w}, height: ${h}`);
 const imageSize = 0.15 * h;  // 食物圖片大小
-const numOfFood = 10;  // 食物數量
+const numOfFood = 8;  // 食物數量
 const shelfWidth = 0.15 * w; // 食物架寬度
 const shelfHeight = 0.98 * h; // 食物架高度
 const classFontSize = 0.03 * w; // 文字大小
@@ -17,6 +17,7 @@ const foodTypes = Object.keys(foodset);
 const GeneralPreload = (scene) => {
   // 設定背景
   scene.add.rectangle(cx, cy, w, h, 0xffffff).setDepth(-1);
+  scene.load.image('foodShelf', '../public/images/ui/foodShelf.png');
   scene.load.image('end', '../public/images/ui/end.png');
   scene.load.image('O', '../public/images/ui/O.png');
   scene.load.image('X', '../public/images/ui/X.png');
@@ -147,18 +148,20 @@ const dragEvent = (scene, GameId, regions, userAnswer, colorSet = null) => {
 }
 
 // 食物區域
-const foodArea = (scene, foodArr, foodlist, x, y, w, h, gw, gh) => {
+const foodArea = (scene, foodArr, foodlist, x, y, wi, he, gw, gh) => {
   // 食物區域
-  const foodShelf = scene.add.rectangle(x, y, w, h, 0x888888).setDepth(-1);
+  const foodShelf = scene.add.rectangle(x, y, wi, he, 0x888888, 0).setDepth(-1);
+  scene.add.image(x, y, 'foodShelf').setDisplaySize(wi, h);
   // 食物物件
+  const NumOfShelfRow = 2;
   const foodSize = foodShelf.height / 5; // 假設每行有五個食物
   const foodSpacingX = foodSize + gw;
-  const foodSpacingY = foodSize + gh;
+  const foodSpacingY = foodSize * 1.15 + gh;
   for (let i = 0; i < numOfFood; i++) {
-    const row = Math.floor(i / 2); // 行數
-    const col = i % 2; // 列數
+    const row = Math.floor(i / NumOfShelfRow); // 行數
+    const col = i % NumOfShelfRow; // 列數
     const x = foodShelf.x - foodSpacingX / 2 + col * foodSpacingX;
-    const y = foodShelf.y - 2 * foodSpacingY + row * foodSpacingY;
+    const y = foodShelf.y - 1.6 * foodSpacingY + row * foodSpacingY;
     const food = scene.add.image(x, y, foodlist[i]);
     food.prevX = food.x;
     food.prevY = food.y;

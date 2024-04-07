@@ -243,7 +243,7 @@ const getRandomFoods = (count, set = null, restriction = null) => {
           // 檢查該顏色類別是否至少有一個食物被選中
           return selectedFoods.some(food => set[color].includes(food));
         });
-        console.log(isCorrect);
+        // console.log(isCorrect);
         if (!isCorrect) { selectedFoods.length = 0; };
       } else {
         // 檢查六大類食物都至少有1個

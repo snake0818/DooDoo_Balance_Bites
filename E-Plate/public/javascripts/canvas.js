@@ -217,7 +217,7 @@ const endView = (scene) => {
 // 隨機食物
 const randomFood = () => {
   // 隨機選擇一個食物類型及食物編號
-  const randomType = foodTypes[Math.round(Math.random() * foodTypes.length)];
+  const randomType = foodTypes[Math.round(Math.random() * (foodTypes.length - 1))];
   const randomFoodNumber = Math.round(Math.random() * foodset[randomType]);
   const randomFoo = randomType + randomFoodNumber;
   return randomFoo;

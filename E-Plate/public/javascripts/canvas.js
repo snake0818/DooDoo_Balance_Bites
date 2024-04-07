@@ -233,18 +233,24 @@ const getRandomFoods = (count, set = null, restriction = null) => {
     // 檢查沒有重複，沒有則push進selectedFoods
     if (ramFoo && !selectedFoods.includes(ramFoo)) { selectedFoods.push(ramFoo); }
 
-    // 食物清單條件設置，確保非限定不會出現
-    if (set) {
-      let isCorrect = !selectedFoods.some(food => {
-        // 檢查食物是否包含在限定顏色之外
-        return !Object.values(colorset).flat().includes(food);
-      });
-      if (!isCorrect) { selectedFoods.length = 0; };
-    } else {
-      // 檢查六大類食物都至少有1個
-      if (selectedFoods.length === count && numOfFood >= 6) {
-        const typesSet = new Set(selectedFoods.map(food => food.replace(/[0-9]|1[0-9]/g, '')));
-        if (typesSet.size !== foodTypes.length) { selectedFoods.length = 0; };
+    if (selectedFoods.length == count) {
+      // 食物清單條件設置，確保非限定不會出現
+      if (set) {
+        const isCorrect = selectedFoods.some(food => {
+          // 檢查食物是否包含在限定顏色之外
+          return Object.values(colorset).flat().includes(food);
+        }) && Object.keys(set).every(color => {
+          // 檢查該顏色類別是否至少有一個食物被選中
+          return selectedFoods.some(food => set[color].includes(food));
+        });
+        console.log(isCorrect);
+        if (!isCorrect) { selectedFoods.length = 0; };
+      } else {
+        // 檢查六大類食物都至少有1個
+        if (selectedFoods.length === count && numOfFood >= 6) {
+          const typesSet = new Set(selectedFoods.map(food => food.replace(/[0-9]|1[0-9]/g, '')));
+          if (typesSet.size !== foodTypes.length) { selectedFoods.length = 0; };
+        }
       }
     }
   }
@@ -268,6 +274,20 @@ const checkAnswer = (scene, method, Arraies, foodObject, place, colorSet = null)
   // 計算總數
   var AnswerNum = Object.keys(Arraies).reduce((total, category) => { return total + Arraies[category].length; }, 0);
 
+  const food = foodObject.texture.key;
+  let findFoodIndex;
+  if (method === 'color') { findFoodIndex = colorSet[place].indexOf(food) }
+  if ((method === 'class' && place === food.split(/[0-9]|1[0-9]+/)[0]) ||
+    (method === 'color' && findFoodIndex !== -1)) {
+    CorrectView(scene);
+  } else {
+    foodObject.x = foodObject.prevX;
+    foodObject.y = foodObject.prevY;
+    findToClean(Arraies, food);
+    WrnogView(scene);
+    return false;
+  }
+
   if (AnswerNum === numOfFood) {
     // 檢驗答案
     var AnswerNum = 0;
@@ -284,20 +304,8 @@ const checkAnswer = (scene, method, Arraies, foodObject, place, colorSet = null)
     });
     // 如果放置總數與食物數量相同，並且沒有分類錯誤，則結束遊戲
     if (numOfWrong === 0) { return true; };
-  } else {
-    const food = foodObject.texture.key;
-    let findFoodIndex;
-    if (method === 'color') { findFoodIndex = colorSet[place].indexOf(food) }
-    if ((method === 'class' && place === food.split(/[0-9]|1[0-9]+/)[0]) ||
-      (method === 'color' && findFoodIndex !== -1)) {
-      CorrectView(scene);
-    } else {
-      foodObject.x = foodObject.prevX;
-      foodObject.y = foodObject.prevY;
-      findToClean(Arraies, food);
-      WrnogView(scene);
-    }
   }
+
   // console.log(Arraies);
   return false;
 }

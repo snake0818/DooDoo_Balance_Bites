@@ -2,7 +2,15 @@ let userAnswer = { nut: [], milk: [], meat: [], vegetable: [], fruit: [], grain:
 
 const gameStart = {
   key: 'gameStart',
-  preload: function () { GeneralPreload(this); },
+  preload: function () {
+    GeneralPreload(this);
+    this.load.image('nut', '../public/images/ui/types/nutText.png');
+    this.load.image('milk', '../public/images/ui/types/milkText.png');
+    this.load.image('meat', '../public/images/ui/types/meatText.png');
+    this.load.image('vegetable', '../public/images/ui/types/vegetableText.png');
+    this.load.image('fruit', '../public/images/ui/types/fruitText.png');
+    this.load.image('grain', '../public/images/ui/types/grainText.png');
+  },
   create: function () {
 
     // /************************************************ 物件設置部分 ************************************************/
@@ -10,9 +18,9 @@ const gameStart = {
     const towerHeight = 0.98 * h;  // 金字塔高
     const foodlist = getRandomFoods(numOfFood);
     const foodArr = [];
-    
+
     // 食物分類金字塔物件
-    const foodTower = this.add.triangle(cx/1.4, cy, 0, towerHeight, 0.5 * towerWidth, 0, towerWidth, towerHeight, 0xffffff).setInteractive();
+    const foodTower = this.add.triangle(cx / 1.4, cy, 0, towerHeight, 0.5 * towerWidth, 0, towerWidth, towerHeight, 0xffffff).setInteractive();
     // 劃分區域
     const regions = [
       {
@@ -85,7 +93,8 @@ const gameStart = {
       // 繪製邊界並填充顏色
       this.add.graphics().lineStyle(0.003 * w, 0x0).strokePoints(region.bounds.points, true).fillStyle(region.color).fillPath();
       // 添加文字
-      this.add.text(region.textSeat[0], region.textSeat[1] - classFontSize / 2, region.text, { font: `${classFontSize}px 標楷體`, fill: '#000000' }).setOrigin(0.5);
+      // this.add.text(region.textSeat[0], region.textSeat[1] - classFontSize / 2, region.text, { font: `${classFontSize}px 標楷體`, fill: '#000000' }).setOrigin(0.5);
+      this.add.image(region.textSeat[0], region.textSeat[1] - classFontSize /2, region.name).setDisplaySize(0.18*w, classFontSize)
       // 定義點擊互動事件，作為驗證
       // foodTower.on('pointerdown', (pointer) => { if (Phaser.Geom.Polygon.Contains(region.bounds, pointer.x, pointer.y)) console.log(`${region.text}`) })
     });

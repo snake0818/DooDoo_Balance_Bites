@@ -16,11 +16,14 @@ const foodTypes = Object.keys(foodset);
 // 預載入資料
 const GeneralPreload = (scene) => {
   // 設定背景
-  scene.add.rectangle(cx, cy, w, h, 0xffffff).setDepth(-1);
+  scene.add.rectangle(cx, cy, w, h, 0xffffff).setDepth(-1);  
+  scene.load.audio('correct', '../public/audios/ui/correct.m4a');
+  scene.load.audio('wrong', '../public/audios/ui/wrong.m4a');
+  
   scene.load.image('foodShelf', '../public/images/ui/foodShelf.png');
   scene.load.image('end', '../public/images/ui/end.png');
-  scene.load.image('O', '../public/images/ui/O.png');
-  scene.load.image('X', '../public/images/ui/X.png');
+  scene.load.image('correct', '../public/images/ui/correct.png');
+  scene.load.image('wrong', '../public/images/ui/wrong.png');
   scene.load.image('nut0', '../public/images/foods/nuts/nut0.png');
   scene.load.image('nut1', '../public/images/foods/nuts/nut1.png');
   scene.load.image('nut2', '../public/images/foods/nuts/nut2.png');
@@ -183,7 +186,7 @@ const fade = (scene, rect, image) => {
     targets: image,
     alpha: 1,
     duration: 0, // 淡入時間為n毫秒
-    delay: 100, // 延遲n毫秒後開始
+    delay: 1000, // 延遲n毫秒後開始
     onComplete: () => {
       // 在淡入完成後執行
       // 淡出效果
@@ -191,7 +194,7 @@ const fade = (scene, rect, image) => {
         targets: image,
         alpha: 0,
         duration: 300, // 淡出時間為n毫秒
-        delay: 100, // 延遲n毫秒後開始
+        delay: 1000, // 延遲n毫秒後開始
         onComplete: () => {
           // 在淡出完成後執行
           image.destroy(); // 刪除圖片
@@ -204,13 +207,15 @@ const fade = (scene, rect, image) => {
 // 正確介面
 const CorrectView = (scene) => {
   const rect = scene.add.rectangle(cx, cy, w, h, 0x0, 0.3).setInteractive();
-  const image = scene.add.image(cx, cy, 'O', 0.3).setDisplaySize(cy, cy);
+  const image = scene.add.image(cx, cy, 'correct', 0.3).setDisplaySize(cy, cy);
+  scene.sound.add('correct').play();
   fade(scene, rect, image);
 }
 // 錯誤介面
 const WrnogView = (scene) => {
   const rect = scene.add.rectangle(cx, cy, w, h, 0x0, 0.3).setInteractive();
-  const image = scene.add.image(cx, cy, 'X', 0.3).setDisplaySize(cy, cy);
+  const image = scene.add.image(cx, cy, 'wrong', 0.3).setDisplaySize(cy, cy);
+  scene.sound.add('wrong').play();
   fade(scene, rect, image);
 }
 // 結束介面

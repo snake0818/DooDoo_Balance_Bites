@@ -8,6 +8,12 @@ const gameStart = {
     this.load.image('rumor3', '../public/images/ui/rumors/rumor3.png');
     this.load.image('rumor4', '../public/images/ui/rumors/rumor4.png');
     this.load.image('rumor5', '../public/images/ui/rumors/rumor5.png');
+    this.load.audio('nut', '../public/audios/rumors/rumor_nut_effect.m4a')
+    this.load.audio('milk', '../public/audios/rumors/rumor_milk_effect.m4a')
+    this.load.audio('meat', '../public/audios/rumors/rumor_meat_effect.m4a')
+    this.load.audio('fruit', '../public/audios/rumors/rumor_fruit_effect.m4a')
+    this.load.audio('vegetable', '../public/audios/rumors/rumor_vegetable_effect.m4a')
+    this.load.audio('grain', '../public/audios/rumors/rumor_grain_effect.m4a')
   },
   create: function () {
 
@@ -17,6 +23,7 @@ const gameStart = {
     let index = 0;
     let food;
     let rumor;  // 唸謠
+    let EffectCompleted = true;
 
     // 食物物件
     // this.add.rectangle(cx, 0.33 * h, 0.3 * w, 0.4 * h, 0x888888);
@@ -34,18 +41,23 @@ const gameStart = {
 
     // 定義互動事件
     screen.on('pointerdown', (pointer) => {
-      if (!rumor) {
+      if (EffectCompleted) {
         const types = Object.keys(foodset);
         const foodType = foodlist[index - 1].split(/[0-9]|1[0-9]+/)[0];
         const typeIndex = types.indexOf(foodType);
         rumor = this.add.image(0.5 * w, 0.8 * h, `rumor${typeIndex}`).setDisplaySize(4.31 * imageSize, imageSize);
-      } else {
-        rumor.destroy();
-        food.destroy();
-        rumor = null;
-        setFood();
+        EffectCompleted = false;
+        const rumorEffect = this.sound.add(foodType)
+        rumorEffect.play();
+        rumorEffect.on('complete', () => {
+          EffectCompleted = true;
+          rumor.destroy();
+          food.destroy();
+          rumor = null;
+          setFood();
+          if (index === numOfFood) { endgame(this); }
+        });
       }
-      if (index === numOfFood + 1) { endgame(this); }
     });
 
   },

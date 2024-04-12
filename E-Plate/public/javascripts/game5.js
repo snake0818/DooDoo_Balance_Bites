@@ -18,12 +18,19 @@ const gameStart = {
     this.load.image('whi', '../public/images/ui/colors/white2.png');
     this.load.image('o_y', '../public/images/ui/colors/orange2.png');
     this.load.image('i_d', '../public/images/ui/colors/indigo2.png');
+
+    this.load.audio('red', '../public/audios/colors/red_effect.m4a');
+    this.load.audio('gre', '../public/audios/colors/green_effect.m4a');
+    this.load.audio('whi', '../public/audios/colors/white_effect.m4a');
+    this.load.audio('o_y', '../public/audios/colors/orange_effect.m4a');
+    this.load.audio('i_d', '../public/audios/colors/indigo_effect.m4a');
   },
   create: function () {
 
     // /************************************************ 物件設置部分 ************************************************/
     const foodlist = getRandomFoods(numOfFood, colorset, restriction);
     const foodArr = [];
+    let EffectCompleted = true;
 
     // 食物分類區域
     const humanBody = this.add.image(cx / 1.4, cy * 1.1, 'body');
@@ -52,6 +59,19 @@ const gameStart = {
       lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x, humanBody.y - ph / 2.65, 1.075 * Regions[2].bounds.x - Regions[2].bounds.width / 2, Regions[2].bounds.y));
       lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x + pw / 13, humanBody.y + ph / 5, 1.075 * Regions[2].bounds.x - Regions[2].bounds.width / 2, Regions[2].bounds.y));
     }
+    // 每個區域添加互動
+    Regions.forEach(region => {
+      region.bounds.setInteractive(); // 設置區域為可交互  
+      // 添加點擊事件
+      region.bounds.on('pointerdown', (pointer) => {
+        if (EffectCompleted) {
+          const soundEffect = this.sound.add(region.name)
+          EffectCompleted = false;
+          soundEffect.play();
+          soundEffect.on('complete', () => { EffectCompleted = true; })
+        }
+      });
+    });
 
     // 食物區域
     foodArea(this, foodArr, foodlist, 0.85 * w, cy, 0.27 * w, 0.95 * h, 0, 0);

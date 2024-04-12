@@ -17,8 +17,6 @@ const gameStart = {
     this.load.image('whi', '../public/images/ui/colors/white.png');
     this.load.image('o_y', '../public/images/ui/colors/orange&yellow.png');
     this.load.image('i_d', '../public/images/ui/colors/indigo&dark.png');
-    // 設定背景
-    this.add.rectangle(cx, cy, w, h, 0xffffff).setDepth(-1);
   },
   create: function () {
 

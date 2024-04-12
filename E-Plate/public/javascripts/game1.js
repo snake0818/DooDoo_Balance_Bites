@@ -16,7 +16,6 @@ const gameStart = {
     // /************************************************ 物件設置部分 ************************************************/
     const foodlist = getRandomFoods(numOfFood);
     const foodArr = [];
-    let statusText = this.add.text(w / 2, classFontSize / 2, '', { font: `${classFontSize}px 標楷體` }).setBackgroundColor('#222222').setOrigin(0.5);
 
     // 食物分類區域
     const typeRegions = [

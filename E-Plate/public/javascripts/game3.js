@@ -65,12 +65,3 @@ const gameStart = {
     // 遊戲狀態更新
   }
 }
-
-const config = {
-  type: Phaser.AUTO,
-  width: w,
-  height: h,
-  parent: 'app',
-  scene: [gameStart,]
-}
-const game = new Phaser.Game(config);

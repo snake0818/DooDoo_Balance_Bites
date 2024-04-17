@@ -319,3 +319,12 @@ const checkAnswer = (scene, method, Arraies, foodObject, place, colorSet = null)
   // console.log(Arraies);
   return false;
 }
+
+const config = {
+  type: Phaser.AUTO,
+  width: w,
+  height: h,
+  parent: 'app',
+  scene: [gameStart,]
+}
+const game = new Phaser.Game(config);

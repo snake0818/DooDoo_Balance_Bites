@@ -421,9 +421,9 @@ clickAbleElements.forEach(element => {
     const ElementAbsent = element.classList.contains("absent");
 
     // 當為缺席模式
-    if (AbsentChecked && !ElementSelected && !ElementLocked) { operate("標記學生為缺考", ConfirmChecked); }
+    if (AbsentChecked && !ElementSelected && !ElementLocked && !ElementAbsent) { operate("標記學生為缺考", ConfirmChecked); }
     // 當為解鎖模式
-    else if (UnlockChecked) {
+    else if (UnlockChecked && (ElementLocked || ElementAbsent)) {
       // 當為鎖定狀態
       if (ElementLocked) { operate("解除鎖定並清空資訊"); }
       // 當為缺席狀態
@@ -432,7 +432,7 @@ clickAbleElements.forEach(element => {
     else if (EditChecked && (ElementSelected || ElementLocked)) { operate("編輯進場時間", ConfirmChecked); }
     else {
       // 當為非鎖定狀態
-      if (!ElementLocked) {
+      if (!ElementLocked && !ElementAbsent) {
         // 學生有無進場狀態
         if (!ElementSelected) { operate("開始監考", ConfirmChecked); }
         else { operate("結束監考", ConfirmChecked); }

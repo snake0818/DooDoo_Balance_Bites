@@ -22,12 +22,12 @@ rt {
   vertical-align: middle;
 }
 
-.btn {
+#ctrl .btn {
   color: #ffffff;
   background-color: #055765;
 }
 
-.btn:hover {
+#ctrl .btn:hover {
   color: #ffffff;
   background-color: #277987;
 }

@@ -12,11 +12,11 @@ const gameStart = {
   key: 'gameStart',
   preload: function () {
     GeneralPreload(this);
-    this.load.image('red', '../public/images/ui/colors/red.png');
-    this.load.image('gre', '../public/images/ui/colors/green.png');
-    this.load.image('whi', '../public/images/ui/colors/white.png');
-    this.load.image('o_y', '../public/images/ui/colors/orange&yellow.png');
-    this.load.image('i_d', '../public/images/ui/colors/indigo&dark.png');
+    this.load.image('red', `${ResourcePATH}/images/ui/colors/red.png`);
+    this.load.image('gre', `${ResourcePATH}/images/ui/colors/green.png`);
+    this.load.image('whi', `${ResourcePATH}/images/ui/colors/white.png`);
+    this.load.image('o_y', `${ResourcePATH}/images/ui/colors/orange&yellow.png`);
+    this.load.image('i_d', `${ResourcePATH}/images/ui/colors/indigo&dark.png`);
   },
   create: function () {
 

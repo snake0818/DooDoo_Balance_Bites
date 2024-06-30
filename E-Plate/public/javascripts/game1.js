@@ -4,12 +4,12 @@ const gameStart = {
   key: 'gameStart',
   preload: function () {
     GeneralPreload(this);
-    this.load.image('nut', '../public/images/ui/types/nut.png');
-    this.load.image('milk', '../public/images/ui/types/milk.png');
-    this.load.image('meat', '../public/images/ui/types/meat.png');
-    this.load.image('vegetable', '../public/images/ui/types/vegetable.png');
-    this.load.image('fruit', '../public/images/ui/types/fruit.png');
-    this.load.image('grain', '../public/images/ui/types/grain.png');
+    this.load.image('nut', `${ResourcePATH}/images/ui/types/nut.png`);
+    this.load.image('milk', `${ResourcePATH}/images/ui/types/milk.png`);
+    this.load.image('meat', `${ResourcePATH}/images/ui/types/meat.png`);
+    this.load.image('vegetable', `${ResourcePATH}/images/ui/types/vegetable.png`);
+    this.load.image('fruit', `${ResourcePATH}/images/ui/types/fruit.png`);
+    this.load.image('grain', `${ResourcePATH}/images/ui/types/grain.png`);
   },
   create: function () {
 

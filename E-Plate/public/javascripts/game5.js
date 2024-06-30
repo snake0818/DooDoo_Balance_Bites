@@ -12,18 +12,18 @@ const gameStart = {
   key: 'gameStart',
   preload: function () {
     GeneralPreload(this);
-    this.load.image('body', '../public/images/ui/body.png');
-    this.load.image('red', '../public/images/ui/colors/red2.png');
-    this.load.image('gre', '../public/images/ui/colors/green2.png');
-    this.load.image('whi', '../public/images/ui/colors/white2.png');
-    this.load.image('o_y', '../public/images/ui/colors/orange2.png');
-    this.load.image('i_d', '../public/images/ui/colors/indigo2.png');
+    this.load.image('body', `${ResourcePATH}/images/ui/body.png`);
+    this.load.image('red', `${ResourcePATH}/images/ui/colors/red2.png`);
+    this.load.image('gre', `${ResourcePATH}/images/ui/colors/green2.png`);
+    this.load.image('whi', `${ResourcePATH}/images/ui/colors/white2.png`);
+    this.load.image('o_y', `${ResourcePATH}/images/ui/colors/orange2.png`);
+    this.load.image('i_d', `${ResourcePATH}/images/ui/colors/indigo2.png`);
 
-    this.load.audio('red', '../public/audios/colors/red_effect.m4a');
-    this.load.audio('gre', '../public/audios/colors/green_effect.m4a');
-    this.load.audio('whi', '../public/audios/colors/white_effect.m4a');
-    this.load.audio('o_y', '../public/audios/colors/orange_effect.m4a');
-    this.load.audio('i_d', '../public/audios/colors/indigo_effect.m4a');
+    this.load.audio('red', `${ResourcePATH}/audios/colors/red_effect.m4a`);
+    this.load.audio('gre', `${ResourcePATH}/audios/colors/green_effect.m4a`);
+    this.load.audio('whi', `${ResourcePATH}/audios/colors/white_effect.m4a`);
+    this.load.audio('o_y', `${ResourcePATH}/audios/colors/orange_effect.m4a`);
+    this.load.audio('i_d', `${ResourcePATH}/audios/colors/indigo_effect.m4a`);
   },
   create: function () {
 

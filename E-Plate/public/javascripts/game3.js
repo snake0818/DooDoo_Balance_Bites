@@ -2,18 +2,18 @@ const gameStart = {
   key: 'gameStart',
   preload: function () {
     GeneralPreload(this);
-    this.load.image('rumor0', '../public/images/ui/rumors/rumor0.png');
-    this.load.image('rumor1', '../public/images/ui/rumors/rumor1.png');
-    this.load.image('rumor2', '../public/images/ui/rumors/rumor2.png');
-    this.load.image('rumor3', '../public/images/ui/rumors/rumor3.png');
-    this.load.image('rumor4', '../public/images/ui/rumors/rumor4.png');
-    this.load.image('rumor5', '../public/images/ui/rumors/rumor5.png');
-    this.load.audio('nut', '../public/audios/rumors/rumor_nut_effect.m4a')
-    this.load.audio('milk', '../public/audios/rumors/rumor_milk_effect.m4a')
-    this.load.audio('meat', '../public/audios/rumors/rumor_meat_effect.m4a')
-    this.load.audio('fruit', '../public/audios/rumors/rumor_fruit_effect.m4a')
-    this.load.audio('vegetable', '../public/audios/rumors/rumor_vegetable_effect.m4a')
-    this.load.audio('grain', '../public/audios/rumors/rumor_grain_effect.m4a')
+    this.load.image('rumor0', `${ResourcePATH}/images/ui/rumors/rumor0.png`);
+    this.load.image('rumor1', `${ResourcePATH}/images/ui/rumors/rumor1.png`);
+    this.load.image('rumor2', `${ResourcePATH}/images/ui/rumors/rumor2.png`);
+    this.load.image('rumor3', `${ResourcePATH}/images/ui/rumors/rumor3.png`);
+    this.load.image('rumor4', `${ResourcePATH}/images/ui/rumors/rumor4.png`);
+    this.load.image('rumor5', `${ResourcePATH}/images/ui/rumors/rumor5.png`);
+    this.load.audio('nut', `${ResourcePATH}/audios/rumors/rumor_nut_effect.m4a`)
+    this.load.audio('milk', `${ResourcePATH}/audios/rumors/rumor_milk_effect.m4a`)
+    this.load.audio('meat', `${ResourcePATH}/audios/rumors/rumor_meat_effect.m4a`)
+    this.load.audio('fruit', `${ResourcePATH}/audios/rumors/rumor_fruit_effect.m4a`)
+    this.load.audio('vegetable', `${ResourcePATH}/audios/rumors/rumor_vegetable_effect.m4a`)
+    this.load.audio('grain', `${ResourcePATH}/audios/rumors/rumor_grain_effect.m4a`)
   },
   create: function () {
 

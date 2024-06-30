@@ -1,4 +1,4 @@
-const webPath = '/website/E-Plate';
+const webPath = window.location.pathname.split('/').slice(0, -1).join('/');
 
 const gameName = [
   '1.<span class="">食<ruby class=""><rt id="pinyin">ㄕ</rt><rt id="tone">ˊ</rt></ruby></span><span class="">物<ruby class=""><rt id="pinyin">ㄨ</rt><rt id="tone">ˋ</rt></ruby></span><span class="">分<ruby class=""><rt id="pinyin">ㄈㄣ</rt></ruby></span><span class="">類<ruby class=""><rt id="pinyin">ㄌㄟ</rt><rt id="tone">ˋ</rt></ruby></span>',
@@ -61,7 +61,7 @@ $(function () {
     // 提取按鈕的ID中的遊戲編號
     var gameId = $(this).attr('id').replace('btn', '');
     // 設置iframe的src屬性為相應的遊戲地址
-    game_frame.attr('src', `${webPath}/views/game${gameId}.html`);
+    game_frame.attr('src', `${webPath}/game.html?game=${gameId}`);
     game_frame.removeClass('d-none'); // 移除 d-none 類以顯示 iframe 區域
     game_title.removeClass('d-none'); // 移除 d-none 類以顯示遊戲名稱區域
     game_title.html(gameName[gameId - 1]); // 添加遊戲名稱
@@ -95,3 +95,6 @@ $(function () {
     }
   });
 });
+
+document.getElementById('webTitle').href = webPath;
+document.getElementById('home').href = webPath;

@@ -4,8 +4,8 @@ const gameStart = {
   key: 'gameStart',
   preload: function () {
     GeneralPreload(this);
-    this.load.image('plate', '../public/images/ui/plate.png');
-    this.load.image('CFAB6F', '../public/images/ui/colors/CFAB6F.png');
+    this.load.image('plate', `${ResourcePATH}/images/ui/plate.png`);
+    this.load.image('CFAB6F', `${ResourcePATH}/images/ui/colors/CFAB6F.png`);
   },
   create: function () {
 

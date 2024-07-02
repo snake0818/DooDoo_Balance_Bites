@@ -1,3 +1,5 @@
+const webPath = window.location.pathname.split('/').slice(0, -1).join('/');
+
 const w = 7680;
 const h = 4320;
 const cx = w / 2;
@@ -225,7 +227,7 @@ const endView = (scene) => {
   const end = scene.add.image(cx, cy, 'end', 0.3).setDisplaySize(cx, w * 0.5 * (3 / 4));
   let backWeb = scene.add.rectangle(end.x - end.width / 1.75, end.y + end.height / 2.3, end.width, end.height).setInteractive();
   let again = scene.add.rectangle(end.x + end.width / 1.75, end.y + end.height / 2.3, end.width, end.height).setInteractive();
-  backWeb.on('pointerup', () => { window.location.href = '/'; })
+  backWeb.on('pointerup', () => { window.location.href = webPath; })
   again.on('pointerup', () => { scene.scene.start('gameStart'); })
 }
 // 隨機食物

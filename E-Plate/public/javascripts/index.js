@@ -84,13 +84,14 @@ $(function () {
   });
 
   // 監聽 iframe 的 src 屬性變化事件，防止重複嵌套
-  document.getElementById('game').addEventListener('load', function () {
-    // 檢查新的 src 是否為根路徑 '/'
-    if (this.contentWindow.location.pathname === '/') {
+  game_frame.on('load', function () {
+    const iframeContent = this.contentWindow;
+    // 檢查新的 src 是否為根路徑 webPath
+    if (iframeContent.location.pathname === `${webPath}/`) {
       // 清除先前的內容
-      this.contentWindow.document.body.innerHTML = '';
+      iframeContent.document.body.innerHTML = '';
       // 隱藏元素
-      game_frame.classList.add('d-none');
+      game_frame.addClass('d-none');
       game_title.addClass('d-none');
     }
   });

@@ -1,69 +1,54 @@
-const colorset = {
-  red: ['vegetable12', 'fruit2', 'fruit4', 'fruit5', 'fruit6', 'fruit8', 'fruit12',],
-  gre: ['vegetable0', 'vegetable2', 'vegetable3', 'vegetable5', 'vegetable6', 'vegetable11', 'fruit1',],
-  whi: ['vegetable7', 'vegetable8',],
-  o_y: ['vegetable1', 'vegetable9', 'fruit0', 'fruit3', 'fruit7', 'fruit9', 'fruit11',],
-  i_d: ['vegetable4', 'vegetable10', 'fruit10',],
-};
-let userAnswer = { red: [], gre: [], whi: [], o_y: [], i_d: [] };
-const restriction = ['vegetable', 'fruit'];
-
 const gameStart = {
   key: 'gameStart',
   preload: function () {
     GeneralPreload(this);
-    this.load.image('body', `${ResourcePATH}/images/ui/body.png`);
-    this.load.image('red', `${ResourcePATH}/images/ui/colors/red2.png`);
-    this.load.image('gre', `${ResourcePATH}/images/ui/colors/green2.png`);
-    this.load.image('whi', `${ResourcePATH}/images/ui/colors/white2.png`);
-    this.load.image('o_y', `${ResourcePATH}/images/ui/colors/orange2.png`);
-    this.load.image('i_d', `${ResourcePATH}/images/ui/colors/indigo2.png`);
-
-    this.load.audio('red', `${ResourcePATH}/audios/colors/red_effect.m4a`);
-    this.load.audio('gre', `${ResourcePATH}/audios/colors/green_effect.m4a`);
-    this.load.audio('whi', `${ResourcePATH}/audios/colors/white_effect.m4a`);
-    this.load.audio('o_y', `${ResourcePATH}/audios/colors/orange_effect.m4a`);
-    this.load.audio('i_d', `${ResourcePATH}/audios/colors/indigo_effect.m4a`);
+    this.load.image('bg5', `${PATH_UI}/bg/bg_game5.png`)
+    this.load.image('body', `${PATH_UI}/body.png`);
+    this.load.image('red', `${PATH_UI}/colors/red2.png`);
+    this.load.image('gre', `${PATH_UI}/colors/green2.png`);
+    this.load.image('whi', `${PATH_UI}/colors/white2.png`);
+    this.load.image('o_y', `${PATH_UI}/colors/orange_and_yellow2.png`);
+    this.load.image('i_d', `${PATH_UI}/colors/blue_and_purple2.png`);
+    this.load.audio('red', `${PATH_Audio}/colors/red_effect.m4a`);
+    this.load.audio('gre', `${PATH_Audio}/colors/green_effect.m4a`);
+    this.load.audio('whi', `${PATH_Audio}/colors/white_effect.m4a`);
+    this.load.audio('o_y', `${PATH_Audio}/colors/orange_effect.m4a`);
+    this.load.audio('i_d', `${PATH_Audio}/colors/indigo_effect.m4a`);
   },
   create: function () {
+    // 背景設置
+    this.add.image(GCX, GCY, 'bg5').setDisplaySize(WIDTH, HEIGHT);
+    // 互動區域設置
+    const interactive = this.add.rectangle(GCX, 1.07 * GCY, .88 * WIDTH, .7 * HEIGHT, '0xaa0000', BGV).setDepth(-1);
+    const [IA_x, IA_cx, IA_X, IA_y, IA_cy, IA_Y, IA_W, IA_H] = getInteractiveAreaMetrics(interactive);
 
     // /************************************************ 物件設置部分 ************************************************/
-    const foodlist = getRandomFoods(numOfFood, colorset, restriction);
+    const foodlist = getRandomFoods(undefined, 'color_fruit_vegetable');
     const foodArr = [];
     let EffectCompleted = true;
 
     // 食物分類區域
-    const humanBody = this.add.image(cx / 1.4, cy * 1.1, 'body');
-    const pw = humanBody.width;
-    const ph = humanBody.height;
-    const Regions = [
-      { name: 'red', bounds: this.add.image(humanBody.x + pw / 1.2, humanBody.y - ph / 2.2, 'red').setDisplaySize(0.25 * w, 0.25 * h) },
-      { name: 'o_y', bounds: this.add.image(humanBody.x - pw / 1.2, humanBody.y - ph / 2.4, 'o_y').setDisplaySize(0.25 * w, 0.25 * h) },
-      { name: 'gre', bounds: this.add.image(humanBody.x + pw / 1.2, humanBody.y - ph / 8, 'gre').setDisplaySize(0.25 * w, 0.25 * h) },
-      { name: 'whi', bounds: this.add.image(humanBody.x - pw / 1.2, humanBody.y - ph / 12, 'whi').setDisplaySize(0.25 * w, 0.25 * h) },
-      { name: 'i_d', bounds: this.add.image(humanBody.x - pw / 1.2, humanBody.y + ph / 4, 'i_d').setDisplaySize(0.25 * w, 0.25 * h) },
+    const [region_W, region_H] = [.22 * IA_W, .28 * IA_H];
+    const typeRegions = [
+      { name: 'o_y', bounds: null },
+      { name: 'whi', bounds: null },
+      { name: 'i_d', bounds: null },
+      { name: 'red', bounds: null },
+      { name: 'gre', bounds: null },
     ];
-    //  器官部位與判定區域連接線
-    {
-      const lineGraphic = this.add.graphics({ lineStyle: { width: 0.001 * w, color: 0x000000 } });
-      //  眼睛
-      lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x - pw / 25, humanBody.y - ph / 2.4, Regions[1].bounds.x + Regions[1].bounds.width / 2.7, Regions[1].bounds.y));
-      //  心臟
-      lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x + pw / 30, humanBody.y - ph / 4.5, Regions[3].bounds.x + Regions[3].bounds.width / 2.7, Regions[3].bounds.y));
-      //  膀胱
-      lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x, humanBody.y - ph / 15, Regions[4].bounds.x + Regions[4].bounds.width / 2.7, Regions[4].bounds.y));
-      //  頭腦
-      lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x, humanBody.y - ph / 2.2, 1.075 * Regions[0].bounds.x - Regions[0].bounds.width / 2, Regions[0].bounds.y));
-      //  牙骨
-      lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x, humanBody.y - ph / 8, 1.075 * Regions[2].bounds.x - Regions[2].bounds.width / 2, Regions[2].bounds.y));
-      lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x, humanBody.y - ph / 2.65, 1.075 * Regions[2].bounds.x - Regions[2].bounds.width / 2, Regions[2].bounds.y));
-      lineGraphic.strokeLineShape(new Phaser.Geom.Line(humanBody.x + pw / 13, humanBody.y + ph / 5, 1.075 * Regions[2].bounds.x - Regions[2].bounds.width / 2, Regions[2].bounds.y));
+    for (let i = 0; i < typeRegions.length; i++) {
+      const dx = (i < 3) ? IA_x : IA_cx;
+      const dy = .36 * IA_H * (i % 3);
+      typeRegions[i].bounds = this.add.image(dx + .5 * region_W, IA_y + .5 * region_H + dy, typeRegions[i].name).setDisplaySize(region_W, region_H).setOrigin(.5);
+      // 測試用點擊事件
+      // typeRegions[i].bounds.setInteractive().on('pointerdown', () => { console.log(`${typeRegions[i].name}`); });
     }
+
     // 每個區域添加互動
-    Regions.forEach(region => {
-      region.bounds.setInteractive(); // 設置區域為可交互  
-      // 添加點擊事件
-      region.bounds.on('pointerdown', (pointer) => {
+    typeRegions.forEach(region => {
+      region.bounds.setDisplaySize(region_W, region_H).setOrigin(.5);
+      // 設置區域為可交互並添加點擊事件
+      region.bounds.setInteractive().on('pointerdown', (pointer) => {
         if (EffectCompleted) {
           const soundEffect = this.sound.add(region.name)
           EffectCompleted = false;
@@ -74,21 +59,24 @@ const gameStart = {
     });
 
     // 食物區域
-    foodArea(this, foodArr, foodlist, 0.85 * w, cy, 0.27 * w, 0.95 * h, 0, 0);
+    const LConfig = {
+      x: IA_X - .135 * IA_W,
+      y: IA_cy,
+      width: .27 * IA_W,
+      heigh: IA_H
+    };
+    foodArea(this, foodArr, foodlist, LConfig);
 
     // /************************************************ 互動事件部分 ************************************************/
 
-    dragEvent(this, 'game5', Regions, userAnswer, colorset); // 添加拖動事件
-  },
-  update: function () {
-    // 遊戲狀態更新
+    dragEvent(this, 'color', typeRegions, userColorAnswer, null); // 添加拖動事件
   }
 }
 
 const config = {
   type: Phaser.AUTO,
-  width: w,
-  height: h,
+  width: WIDTH,
+  height: HEIGHT,
   parent: 'app',
   scene: [gameStart,]
 }

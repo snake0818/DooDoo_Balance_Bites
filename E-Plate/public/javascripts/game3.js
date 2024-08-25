@@ -2,134 +2,122 @@ const gameStart = {
   key: 'gameStart',
   preload: function () {
     GeneralPreload(this);
-    this.load.image('rumor0', `${ResourcePATH}/images/ui/rumors/rumor0.png`);
-    this.load.image('rumor1', `${ResourcePATH}/images/ui/rumors/rumor1.png`);
-    this.load.image('rumor2', `${ResourcePATH}/images/ui/rumors/rumor2.png`);
-    this.load.image('rumor3', `${ResourcePATH}/images/ui/rumors/rumor3.png`);
-    this.load.image('rumor4', `${ResourcePATH}/images/ui/rumors/rumor4.png`);
-    this.load.image('rumor5', `${ResourcePATH}/images/ui/rumors/rumor5.png`);
-    this.load.image('rumors', `${ResourcePATH}/images/ui/rumors/rumors.png`);
-    this.load.image('alert', `${ResourcePATH}/images/ui/click_to_continue.png`);
-    this.load.image('rumor_btn', `${ResourcePATH}/images/ui/rumor_btn.png`);
-    this.load.audio('nut', `${ResourcePATH}/audios/rumors/rumor_nut_effect.m4a`);
-    this.load.audio('milk', `${ResourcePATH}/audios/rumors/rumor_milk_effect.m4a`);
-    this.load.audio('meat', `${ResourcePATH}/audios/rumors/rumor_meat_effect.m4a`);
-    this.load.audio('fruit', `${ResourcePATH}/audios/rumors/rumor_fruit_effect.m4a`);
-    this.load.audio('vegetable', `${ResourcePATH}/audios/rumors/rumor_vegetable_effect.m4a`);
-    this.load.audio('grain', `${ResourcePATH}/audios/rumors/rumor_grain_effect.m4a`);
-    this.load.audio('all_rumor', `${ResourcePATH}/audios/rumors/rumors_effect.m4a`);
+    this.load.image('bg3', `${PATH_UI}/bg/bg_game3.png`);
+    this.load.image('bg3-1', `${PATH_UI}/bg/bg_game3-1.png`);
+    this.load.image('formula0', `${PATH_UI}/formulas/formula0.png`);
+    this.load.image('formula1', `${PATH_UI}/formulas/formula1.png`);
+    this.load.image('formula2', `${PATH_UI}/formulas/formula2.png`);
+    this.load.image('formula3', `${PATH_UI}/formulas/formula3.png`);
+    this.load.image('formula4', `${PATH_UI}/formulas/formula4.png`);
+    this.load.image('formula5', `${PATH_UI}/formulas/formula5.png`);
+    this.load.image('btn_formulaListPlay', `${PATH_UI}/buttons/btn_formula_list_play.png`);
+    this.load.image('btn_gamePlay', `${PATH_UI}/buttons/btn_game_play.png`);
+    this.load.image('btn_answer', `${PATH_UI}/buttons/btn_game_answer.png`);
+    this.load.image('btn_next', `${PATH_UI}/buttons/btn_game_next.png`);
+    this.load.audio('nut', `${PATH_Audio}/formulas/formula_nut_effect.m4a`);
+    this.load.audio('dairy', `${PATH_Audio}/formulas/formula_dairy_effect.m4a`);
+    this.load.audio('meat', `${PATH_Audio}/formulas/formula_meat_effect.m4a`);
+    this.load.audio('fruit', `${PATH_Audio}/formulas/formula_fruit_effect.m4a`);
+    this.load.audio('vegetable', `${PATH_Audio}/formulas/formula_vegetable_effect.m4a`);
+    this.load.audio('grain', `${PATH_Audio}/formulas/formula_grain_effect.m4a`);
+    this.load.audio('formulaList', `${PATH_Audio}/formulas/formula_list_effect.m4a`);
   },
   create: function () {
+    const Size_image = 2 * imageSize; // 食物圖片大小
+    const Size_BTN = 1.5 * imageSize; // 按鈕圖片大小
+    const topic = 10; // 題目數量
+    const foodlist = getRandomFoods(topic); // 隨機食物陣列
+    let index; // 宣告用於顯示第幾個食物
+    let image_food; // 宣告用於暫存食物圖片
+    let image_formula; // 宣告圖片元素
+    let audio_formula; // 宣告播放音效元素
+    let audioSTATUS = false; // 宣告用於表示音訊播放狀態
+
+    // 背景設置
+    const bg = this.add.image(GCX, GCY, 'bg3').setDisplaySize(WIDTH, HEIGHT);
+
+    // 播放口訣按鈕
+    let btn_rumor_play = this.add.image(GCX - Size_BTN, 1.65 * GCY, 'btn_formulaListPlay').setDisplaySize(2 * Size_BTN, Size_BTN);
+    btn_rumor_play.setInteractive().on('pointerdown', () => {
+      // 若'沒有播放'狀態，則賦予新狀態並播放音訊
+      if (!audioSTATUS) {
+        audioSTATUS = true; // 賦予狀態
+        audio_formula = this.sound.add('formulaList'); // 添加音訊
+        audio_formula.play(); // 播放音訊
+        // 播放完畢，清除狀態
+        audio_formula.on('complete', () => { audioSTATUS = false; });
+      }
+    });
+
+    // 開始遊玩按鈕
+    let btn_game_play = this.add.image(GCX + Size_BTN, 1.65 * GCY, 'btn_gamePlay').setDisplaySize(2 * Size_BTN, Size_BTN);
+    btn_game_play.setInteractive().on('pointerdown', () => {
+      // 若'正在播放'狀態，則清除音訊及狀態
+      if (audioSTATUS) { audio_formula.destroy(); audioSTATUS = false; }
+      // 更換背景
+      bg.setTexture('bg3-1');
+      // 清除按鈕
+      btn_rumor_play.destroy();
+      btn_game_play.destroy();
+      // 執行開始遊戲函式
+      game_play();
+    });
 
     // /************************************************ 物件設置部分 ************************************************/
-    const imageSize = 0.35 * h; // 食物圖片大小
-    const foodlist = getRandomFoods(numOfFood); // 隨機食物陣列
-    let index; // 宣告用於顯示第幾個食物
-    let food; // 宣告用於暫存食物圖片
-    let rumor;  // 宣告用於暫存唸謠圖片
-    let rumorEffect; // 宣告播放音效元素
-    let EffectCompleted = true; // 宣告用於表示音效播放狀態
-    let completed = false; // 宣告用於表示該食物唸謠已完成
-    // 提示使用者點擊畫面已進入下一階段之文字圖示
-    const alert_img = this.add.image(cx, 0.95 * h, 'alert').setDisplaySize(0.75 * cx, 0.25 * imageSize).setVisible(false);
-
-    const show_rumors_collection = () => {
-      // 顯示唸謠總圖
-      const rumorsCollection = this.add.image(cx, 0.875 * cy, 'rumors').setDisplaySize(0.8 * cx, 0.8 * h);
-      // 顯示按鈕
-      const rumorsBtns = this.add.image(cx, 0.925 * h, 'rumor_btn').setDisplaySize(0.35 * w, 0.25 * cy);
-      // 按鈕區域點擊元素
-      const effect_btn = this.add.rectangle(rumorsBtns.x - rumorsBtns.width / 1.9, rumorsBtns.y, rumorsBtns.width / 1.15, rumorsBtns.height / 0.6).setInteractive();
-      const continue_btn = this.add.rectangle(rumorsBtns.x + rumorsBtns.width / 1.9, rumorsBtns.y, rumorsBtns.width / 1.15, rumorsBtns.height / 0.6).setInteractive();
-
-      // '播放音效'按鈕點擊事件
-      effect_btn.on('pointerdown', (pointer) => {
-        if (EffectCompleted) {
-          EffectCompleted = false;
-          rumorEffect = this.sound.add('all_rumor');
-          rumorEffect.play();
-          rumorEffect.on('complete', () => { EffectCompleted = true; });
-        }
-      });
-
-      // '開始遊玩'按鈕點擊事件
-      continue_btn.on('pointerdown', (pointer) => {
-        // 清除唸謠總圖及按鈕圖與其點擊區域元素
-        rumorsCollection.destroy();
-        rumorsBtns.destroy();
-        effect_btn.destroy();
-        continue_btn.destroy();
-        // 如果正在播放音效則清除並重置紀錄
-        if (!EffectCompleted) {
-          rumorEffect.destroy();
-          EffectCompleted = true;
-        }
-        // 執行開始遊戲函式
-        game_play();
-      });
-    }
 
     // 食物物件
-    // this.add.rectangle(cx, 0.33 * h, 0.3 * w, 0.4 * h, 0x888888);
-    const setFood = () => {
+    const setFood = () => {      
       // 若所有食物都已播放完畢則結束遊戲
-      if (++index === numOfFood) { endgame(this);return; }
-      // 重置唸謠完成狀態
-      completed = false;
+      if (++index === topic) { endGame(this); return; }
+      completed = false; // 重置唸謠完成狀態
       // 設置食物圖片
-      food = this.add.image(cx, 0.33 * h, foodlist[index]);
-      food.setDisplaySize((food.width / food.height) * imageSize, imageSize);
+      image_food = this.add.image(GCX, .7 * GCY, foodlist[index])
+      image_food.setDisplaySize((image_food.width / image_food.height) * Size_image, Size_image);
       // 設置對應食物之唸謠文字圖片
-      const types = Object.keys(foodset);
+      const types = Object.keys(foodSet);
       const foodType = foodlist[index].split(/[0-9]|1[0-9]+/)[0];
       const typeIndex = types.indexOf(foodType);
-      rumor = this.add.image(0.5 * w, 0.75 * h, `rumor${typeIndex}`).setDisplaySize(3.3 * imageSize, imageSize / 1.3).setVisible(false);
+      image_formula = this.add.image(GCX, 1.19 * GCY, `formula${typeIndex}`).setDisplaySize(2.5 * Size_image, .6 * Size_image).setVisible(false);
       // 設置對應食物之唸謠音效
-      rumorEffect = this.sound.add(foodType);
-      // 顯示提示文字圖片
-      alert_img.setVisible(true);
+      audio_formula = this.sound.add(foodType);
     }
 
     const game_play = () => {
       index = -1; // 初始化 index
       setFood(); // 執行顯示食物物件函式
 
-      // 定義互動元素及其點擊事件
-      screen = this.add.rectangle(cx, cy, w, h, 0xffffff, 0).setInteractive();
-      screen.on('pointerdown', (pointer) => {
-        if (EffectCompleted) {
-          if (!completed) {
-            rumor.setVisible(true); // 顯示唸謠文字圖片
-            alert_img.setVisible(false); // 隱藏提示文字圖片
-            EffectCompleted = false; // 將要播放音效，賦予狀態
-            rumorEffect.play(); // 播放音效
-            rumorEffect.on('complete', () => {
-              EffectCompleted = true; // 音效播放完畢，賦予狀態
-              completed = true; // 該食物唸謠完畢，賦予狀態
-              alert_img.setVisible(true); // 顯示提示文字圖片
-            });
-          } else {
-            // 清除當前食物相關之元件
-            rumor.destroy();
-            food.destroy();
-            alert_img.setVisible(false); // 隱藏提示文字圖片
-            setFood();
-          }
+      // 定義"解答"按鈕元件及其點擊事件
+      const BTN_answer = this.add.image(GCX - Size_BTN, 1.5 * GCY, 'btn_answer').setDisplaySize(2 * Size_BTN, Size_BTN);
+      BTN_answer.setInteractive().on('pointerdown', (pointer) => {
+        // 若'沒有播放'狀態
+        if (!audioSTATUS) {
+          image_formula.setVisible(true); // 顯示唸謠文字圖片
+          audioSTATUS = true; // 賦予狀態
+          audio_formula.play(); // 播放音訊
+          // 播放完畢，清除狀態
+          audio_formula.on('complete', () => { audioSTATUS = false; });
         }
       });
-    }
 
-    show_rumors_collection();
-  },
-  update: function () {
-    // 遊戲狀態更新
+      // 定義"下一個"按鈕元件及其點擊事件
+      const BTN_next = this.add.image(GCX + Size_BTN, 1.5 * GCY, 'btn_next').setDisplaySize(2 * Size_BTN, Size_BTN);
+      BTN_next.setInteractive().on('pointerdown', (pointer) => {
+        // 清除當前食物相關之元件
+        image_food.destroy();
+        image_formula.destroy();
+        audio_formula.destroy();
+        audioSTATUS = false;
+        // 設置新食物
+        setFood();
+      });
+    }
   }
 }
 
 const config = {
   type: Phaser.AUTO,
-  width: w,
-  height: h,
+  width: WIDTH,
+  height: HEIGHT,
   parent: 'app',
   scene: [gameStart,]
 }

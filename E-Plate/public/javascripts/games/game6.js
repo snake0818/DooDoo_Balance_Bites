@@ -45,63 +45,81 @@ const gameStart = {
 
     // 定義特定放置位置
     const positionMapping = {
-      'nut': [{ x: typeRegions[0].bounds.x, y: typeRegions[0].bounds.y },],
+      'nut': [
+        {
+          x: typeRegions[0].bounds.x - .05 * typeRegions[0].bounds.width,
+          y: typeRegions[0].bounds.y - .2 * typeRegions[0].bounds.height,
+          sizeMulti: .65
+        },],
       'dairy': [
         {
           x: typeRegions[1].bounds.x,
-          y: typeRegions[1].bounds.y - .25 * typeRegions[1].bounds.height
+          y: typeRegions[1].bounds.y - .25 * typeRegions[1].bounds.height,
+          sizeMulti: undefined
         },
         {
           x: typeRegions[1].bounds.x,
-          y: typeRegions[1].bounds.y + .25 * typeRegions[1].bounds.height
+          y: typeRegions[1].bounds.y + .25 * typeRegions[1].bounds.height,
+          sizeMulti: undefined
         },],
       'meat': [
         {
           x: typeRegions[2].bounds.x - .275 * typeRegions[2].bounds.width,
-          y: typeRegions[2].bounds.y + .2 * typeRegions[2].bounds.height
+          y: typeRegions[2].bounds.y + .2 * typeRegions[2].bounds.height,
+          sizeMulti: undefined
         },
         {
           x: typeRegions[2].bounds.x,
-          y: typeRegions[2].bounds.y + .2 * typeRegions[2].bounds.height
+          y: typeRegions[2].bounds.y + .2 * typeRegions[2].bounds.height,
+          sizeMulti: undefined
         },
         {
           x: typeRegions[2].bounds.x + .275 * typeRegions[2].bounds.width,
-          y: typeRegions[2].bounds.y + .2 * typeRegions[2].bounds.height
+          y: typeRegions[2].bounds.y + .2 * typeRegions[2].bounds.height,
+          sizeMulti: undefined
         },],
       'fruit': [
         {
           x: typeRegions[3].bounds.x - .2 * typeRegions[3].bounds.width,
-          y: typeRegions[3].bounds.y + .1 * typeRegions[3].bounds.height
+          y: typeRegions[3].bounds.y + .1 * typeRegions[3].bounds.height,
+          sizeMulti: undefined
         },
         {
           x: typeRegions[3].bounds.x + .15 * typeRegions[3].bounds.width,
-          y: typeRegions[3].bounds.y + .1 * typeRegions[3].bounds.height
+          y: typeRegions[3].bounds.y + .1 * typeRegions[3].bounds.height,
+          sizeMulti: undefined
         },],
       'grain': [
         {
           x: typeRegions[4].bounds.x,
-          y: typeRegions[4].bounds.y - .05 * typeRegions[4].bounds.height
+          y: typeRegions[4].bounds.y - .05 * typeRegions[4].bounds.height,
+          sizeMulti: undefined
         },
         {
           x: typeRegions[4].bounds.x,
-          y: typeRegions[4].bounds.y + .15 * typeRegions[4].bounds.height
+          y: typeRegions[4].bounds.y + .15 * typeRegions[4].bounds.height,
+          sizeMulti: undefined
         },
         {
           x: typeRegions[4].bounds.x,
-          y: typeRegions[4].bounds.y + .35 * typeRegions[4].bounds.height
+          y: typeRegions[4].bounds.y + .35 * typeRegions[4].bounds.height,
+          sizeMulti: undefined
         },],
       'vegetable': [
         {
           x: typeRegions[5].bounds.x,
-          y: typeRegions[5].bounds.y - .05 * typeRegions[5].bounds.height
+          y: typeRegions[5].bounds.y - .05 * typeRegions[5].bounds.height,
+          sizeMulti: undefined
         },
         {
           x: typeRegions[5].bounds.x,
-          y: typeRegions[5].bounds.y + .15 * typeRegions[5].bounds.height
+          y: typeRegions[5].bounds.y + .15 * typeRegions[5].bounds.height,
+          sizeMulti: undefined
         },
         {
           x: typeRegions[5].bounds.x,
-          y: typeRegions[5].bounds.y + .35 * typeRegions[5].bounds.height
+          y: typeRegions[5].bounds.y + .35 * typeRegions[5].bounds.height,
+          sizeMulti: undefined
         },],
     }
     const topic = 14;

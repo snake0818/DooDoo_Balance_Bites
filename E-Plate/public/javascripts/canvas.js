@@ -12,7 +12,8 @@ const PATH_Audio = `${resourcePATH}/audios`;
 const [WIDTH, HEIGHT] = [7680, 4320];   // 全域寬高
 const [GCX, GCY] = [WIDTH / 2, HEIGHT / 2];   // 全域中心點
 const DefaultNumOfFood = 8;  // 食物數量
-const imageSize = 0.1 * HEIGHT;  // 食物圖片大小
+const imageSize = 0.1 * HEIGHT;  // 圖片大小
+let food_size = null;
 
 // 設置限制
 const foodSet = { nut: 3, dairy: 3, meat: 11, vegetable: 13, fruit: 14, grain: 9 };
@@ -120,6 +121,7 @@ const foodArea = (scene, foodArr, foodlist, layoutConfig) => {
   const numOfShelfRows = 4; // 食物櫃總列數
   const numOfFoodInRow = Math.ceil(foodlist.length / numOfShelfRows); // 每行食物數量
   const foodSize = .15 * heigh;
+  food_size = foodSize;
   const Colgap = (foodShelf.width - numOfFoodInRow * foodSize) / numOfFoodInRow;
   const RowGap = foodShelf.height * .105;
   for (let i = 0; i < foodlist.length; i++) {
@@ -377,7 +379,11 @@ const revertFoodPosition = (FoodObject) => {
 const setFoodObjectPosition = (PosMapping, FoodObject, PosIndex) => {
   if (PosMapping.length > PosIndex) {
     const position = PosMapping[PosIndex];
+    const multiple = (position.sizeMulti) ? position.sizeMulti : 1;
+    console.log(multiple, position.sizeMulti);
+    
     FoodObject.setPosition(position.x, position.y);
+    FoodObject.setDisplaySize(multiple * food_size, multiple * food_size);
     FoodObject.input.enabled = false;
   } else { revertFoodPosition(FoodObject); }
 }

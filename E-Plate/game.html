@@ -11,7 +11,8 @@
   <div id="app"></div>
   <script src="public/javascripts/lib/phaser.min.js"></script>
   <script src="public/javascripts/canvas.js"></script>
-  <script>
+  <script src="public/javascripts/games.js"></script>
+  <!-- <script>
     // 獲取URL參數
     function getQueryParam(param) {
       const queryString = window.location.search;
@@ -22,10 +23,10 @@
     const gameNumber = getQueryParam('game');
     if (gameNumber) {
       const script = document.createElement('script');
-      script.src = `public/javascripts/game${gameNumber}.js`;
+      script.src = `public/javascripts/games/game${gameNumber}.js`;
       document.body.appendChild(script);
     } else { console.error('未指定game參數'); }
-  </script>
+  </script> -->
 </body>
 
 </html>

@@ -600,11 +600,11 @@ const MainMenu = {
   }
 }
 
-// const config = {
-//   type: Phaser.AUTO,
-//   width: WIDTH,
-//   height: HEIGHT,
-//   parent: 'app',
-//   scene: [MainMenu, game1, game2, game3, game4, game5, game6]
-// }
-// const game = new Phaser.Game(config);
+const config = {
+  type: Phaser.AUTO,
+  width: WIDTH,
+  height: HEIGHT,
+  parent: 'app',
+  scene: [MainMenu, game1, game2, game3, game4, game5, game6]
+}
+const game = new Phaser.Game(config);

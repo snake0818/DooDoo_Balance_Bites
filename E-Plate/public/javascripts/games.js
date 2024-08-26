@@ -220,11 +220,11 @@ const game4 = {
   key: 'game4',
   preload: function () {
     this.load.image('bg4', `${PATH_UI}/bg/bg_game4.png`)
-    this.load.image('red', `${PATH_UI}/colors/Red.png`);
-    this.load.image('gre', `${PATH_UI}/colors/Green.png`);
-    this.load.image('whi', `${PATH_UI}/colors/White.png`);
-    this.load.image('o_y', `${PATH_UI}/colors/Orange_and_yellow.png`);
-    this.load.image('i_d', `${PATH_UI}/colors/Blue_and_purple.png`);
+    this.load.image('red', `${PATH_UI}/colors/red.png`);
+    this.load.image('gre', `${PATH_UI}/colors/green.png`);
+    this.load.image('whi', `${PATH_UI}/colors/white.png`);
+    this.load.image('o_y', `${PATH_UI}/colors/orange_and_yellow.png`);
+    this.load.image('i_d', `${PATH_UI}/colors/blue_and_purple.png`);
   },
   create: function () {
     // 背景設置

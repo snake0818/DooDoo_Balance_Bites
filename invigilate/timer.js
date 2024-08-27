@@ -149,8 +149,11 @@ rowList.forEach((row, index) => {
       const item_cell = document.createElement('td');
       item_cell.innerHTML = `
         <div class="student">${item}號</div>
-        <div class="Entry-time-set">進<span class="Entry-time"></span></div>
-        <div class="Leave-time-set">出<span class="Leave-time"></span></div>
+        <div class="time">
+          <div class="Entry-time-set">進<span class="Entry-time"></span></div>
+          <div class="Leave-time-set">出<span class="Leave-time"></span></div>
+        </div>
+        <div class="Countdown"></div>
       `;
       item_cell.colSpan = cell_col_num;
       item_cell.classList.add('clickAble');
@@ -275,6 +278,9 @@ document.getElementById("clean-cookie").addEventListener("click", () => {
           element.classList = 'clickAble';
           element.querySelector('.Entry-time').textContent = '';
           element.querySelector('.Leave-time').textContent = '';
+          element.querySelector('.Countdown').style.display = 'none';
+          element.querySelector('.Entry-time-set').style.display = 'block';
+          element.querySelector('.Leave-time-set').style.display = 'block';
         })
         // 檢驗 cookie 是否被刪除並給予回應
         if (!checkCookieExist(cookieName)) {
@@ -301,6 +307,8 @@ loadCookieData(); // 執行讀取資訊函數
 clickAbleElements.forEach(element => {
   element.addEventListener('click', () => {
     const number = element.querySelector('.student');
+    const elementEntry = element.querySelector('.Entry-time-set');
+    const elementLeave = element.querySelector('.Leave-time-set');
     const elementEntryTime = element.querySelector('.Entry-time');
     const elementLeaveTime = element.querySelector('.Leave-time');
 
@@ -322,6 +330,28 @@ clickAbleElements.forEach(element => {
           confirmAction = () => {
             element.classList.remove('selected');
             element.classList.add('locked');
+
+            var timer = element.querySelector('.Countdown');
+            if (!timer.classList.contains('running')) {
+            var time = 300;
+              timer.classList.add('running');
+              elementEntry.style.display = 'none';
+              elementLeave.style.display = 'none';
+              var countdown = setInterval(function () {
+                var minutes = Math.floor(time / 60);
+                var seconds = time % 60;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                timer.textContent = minutes + ':' + seconds;
+                time--;
+                if (time < 0) {
+                  clearInterval(countdown);
+                  timer.textContent = '';
+                  elementEntry.style.display = 'block';
+                  elementLeave.style.display = 'block';
+                  timer.classList.remove('running');
+                }
+              }, 1000);
+            }
           };
           break;
         case '解除鎖定並清空資訊':

@@ -10,7 +10,5 @@ document.getElementById('btn-screenshot').addEventListener('click', () => {
       link.download = 'screenshot.png';
       link.click();
     })
-    .catch((error) => {
-      console.error('截圖失敗:', error);
-    });
+    .catch((error) => { console.error('截圖失敗:', error); });
 });

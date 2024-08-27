@@ -37,8 +37,6 @@ const game1 = {
       const dx = (i < 3) ? IA_x + .5 * region_W : IA_X - .5 * region_W;
       const dy = .35 * IA_H * (i % 3);
       typeRegions[i].bounds = this.add.image(dx, IA_y + .5 * region_H + dy, typeRegions[i].name).setDisplaySize(region_W, region_H).setOrigin(.5);
-      // 測試用點擊事件
-      // typeRegions[i].bounds.setInteractive().on('pointerdown', () => { console.log(`${typeRegions[i].name}`); });
     }
 
     // 食物區域
@@ -250,8 +248,6 @@ const game4 = {
       const dx = (i < 3) ? IA_x + .5 * region_W : IA_X - .5 * region_W;
       const dy = .35 * IA_H * (i % 3) + .175 * IA_H * Math.floor(i / 3);
       typeRegions[i].bounds = this.add.image(dx, IA_y + .5 * region_H + dy, typeRegions[i].name).setDisplaySize(region_W, region_H).setOrigin(.5);
-      // 測試用點擊事件
-      // typeRegions[i].bounds.setInteractive().on('pointerdown', () => { console.log(`${typeRegions[i].name}`); });
     }
 
     // 食物區域
@@ -310,8 +306,6 @@ const game5 = {
       const dx = (i < 3) ? IA_x : IA_cx;
       const dy = .36 * IA_H * (i % 3);
       typeRegions[i].bounds = this.add.image(dx + .5 * region_W, IA_y + .5 * region_H + dy, typeRegions[i].name).setDisplaySize(region_W, region_H).setOrigin(.5);
-      // 測試用點擊事件
-      // typeRegions[i].bounds.setInteractive().on('pointerdown', () => { console.log(`${typeRegions[i].name}`); });
     }
 
     // 每個區域添加互動
@@ -580,6 +574,7 @@ const MainMenu = {
             GamingName = typeRegions[i].name;
             // 啟用指定遊戲場景
             this.scene.start(GamingName);
+            GamingID = GamingName;
           })
           .on('pointerover', () => {
             if (!audioSTATUS) {

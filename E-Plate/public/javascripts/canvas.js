@@ -29,7 +29,9 @@ const totalPlateCount = Object.values(plateSet).reduce((total, count) => total +
 const fruitAndVeget = ['vegetable', 'fruit'];
 const foodTypes = Object.keys(foodSet); // 取得所有 foodSet 的鍵(食物類型)
 
-let GamingName; // 正在進行的遊戲名稱紀錄
+// 遊玩紀錄變數
+let timerInterval; // 計時器元件
+let GamingID = null, NumOfError = 0, PlayTime = 0;
 
 // 測試用參數
 const audio_effect_play = true;
@@ -140,7 +142,11 @@ const foodArea = (scene, foodArr, foodlist, layoutConfig) => {
 
 // 遊戲結束
 const endGame = (scene, userAnswer = null) => {
+  // 停止計時，並送出紀錄資訊
+  stopTimer();
+  sendRecord(GamingID, NumOfError, PlayTime);
   // 清除資料
+  NumOfError = 0;
   if (userAnswer) Object.keys(userAnswer).forEach(category => { userAnswer[category].length = 0; });
   // ********** 結束介面 **********
   const end_bg = scene.add.image(GCX, GCY, 'end').setDisplaySize(WIDTH, HEIGHT);
@@ -149,7 +155,7 @@ const endGame = (scene, userAnswer = null) => {
     const backWeb = scene.add.image(GCX - .1 * WIDTH, GCY + .25 * HEIGHT, 'btn_home').setDisplaySize(3 * imageSize, 1.5 * imageSize);
     const again = scene.add.image(GCX + .1 * WIDTH, GCY + .25 * HEIGHT, 'btn_again').setDisplaySize(3 * imageSize, 1.5 * imageSize);
     // '返回網站'按鈕點擊事件，回到主選單場景
-    backWeb.setInteractive().on('pointerdown', () => { scene.scene.stop(GamingName); scene.scene.start('MainMenu'); });
+    backWeb.setInteractive().on('pointerdown', () => { GamingID = null; scene.scene.stop(GamingName); scene.scene.start('MainMenu'); });
     // '再次遊玩'按鈕點擊事件，再次啟用當前遊戲場景
     again.setInteractive().on('pointerdown', () => { scene.scene.start(GamingName); });
   });
@@ -173,15 +179,6 @@ const dragEvent = (scene, gameType, topicNum = DefaultNumOfFood, regions, userAn
 
       // 檢查並取得食物放置區域
       for (const region of regions) {
-        // switch (gameType) {
-        //   case 'class':
-        //   case 'color':
-        //     inArea = Phaser.Geom.Rectangle.Contains(region.bounds.getBounds(), gameObject.x, gameObject.y);
-        //     break;
-        //   default:
-        //     console.error('GAMETYPE ERROR');
-        // }
-
         // 若食物在特定區域範圍內
         if (Phaser.Geom.Rectangle.Contains(region.bounds.getBounds(), gameObject.x, gameObject.y)) {
           place = region.name; // 特定區域名稱
@@ -199,6 +196,7 @@ const dragEvent = (scene, gameType, topicNum = DefaultNumOfFood, regions, userAn
             else showResultView(scene, 'correct');
           }
           else {
+            NumOfError++;
             revertFoodPosition(gameObject);
             findToClean(userAnswer, objName);
             showResultView(scene, 'wrong');
@@ -210,6 +208,7 @@ const dragEvent = (scene, gameType, topicNum = DefaultNumOfFood, regions, userAn
       // 不在任何放置區域位置，則回到初始位置
       if (!place) revertFoodPosition(gameObject);
     });
+  startTimer();
 }
 
 // 取得隨機食物集
@@ -271,7 +270,6 @@ const getRandomFoods = (count = DefaultNumOfFood, RestrictionType = null) => {
             count: selectedFoods.filter(food => food.startsWith(category)).length
           };
         });
-        // console.log(foodCounts);
       }
     }
   }
@@ -380,8 +378,7 @@ const setFoodObjectPosition = (PosMapping, FoodObject, PosIndex) => {
   if (PosMapping.length > PosIndex) {
     const position = PosMapping[PosIndex];
     const multiple = (position.sizeMulti) ? position.sizeMulti : 1;
-    console.log(multiple, position.sizeMulti);
-    
+
     FoodObject.setPosition(position.x, position.y);
     FoodObject.setDisplaySize(multiple * food_size, multiple * food_size);
     FoodObject.input.enabled = false;
@@ -413,3 +410,13 @@ const verifyAnswer = (Method, UserAnswers, targetNum) => {
   }
   return false;
 }
+
+// 計時器
+const startTimer = () => {
+  // 停止計時器，並初始化時間變數
+  if (timerInterval) clearInterval(timerInterval);
+  PlayTime = 0;
+  // 啟動計時器
+  timerInterval = setInterval(() => { PlayTime++; }, 1000);
+}
+const stopTimer = () => { if (timerInterval) clearInterval(timerInterval); }

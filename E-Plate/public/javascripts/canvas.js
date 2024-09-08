@@ -161,6 +161,17 @@ const endGame = (scene, userAnswer = null) => {
   });
 }
 
+const guide = (scene, audioName) => {
+  const bg = scene.add.rectangle(GCX, GCY, WIDTH, HEIGHT, 0xffffff, 0).setDepth(1).setInteractive();
+  const audio_guide = scene.sound.add(audioName);
+  audio_guide.play();
+  audio_guide.on('complete', () => {
+    bg.destroy();
+    audio_guide.destroy();
+    startTimer();
+  });
+}
+
 // 定義拖動事件
 const dragEvent = (scene, gameType, topicNum = DefaultNumOfFood, regions, userAnswer, posMapping = null) => {
   scene.input
@@ -208,7 +219,6 @@ const dragEvent = (scene, gameType, topicNum = DefaultNumOfFood, regions, userAn
       // 不在任何放置區域位置，則回到初始位置
       if (!place) revertFoodPosition(gameObject);
     });
-  startTimer();
 }
 
 // 取得隨機食物集

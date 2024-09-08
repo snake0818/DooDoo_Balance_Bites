@@ -11,6 +11,7 @@ const game1 = {
     this.load.image('vegetable', `${PATH_UI}/types/vegetables.png`);
     this.load.image('fruit', `${PATH_UI}/types/fruits.png`);
     this.load.image('grain', `${PATH_UI}/types/grains.png`);
+    this.load.audio('guide1', `${PATH_Audio}/guides/guide1.m4a`);
   },
   create: function () {
     // 背景設置
@@ -48,6 +49,8 @@ const game1 = {
     };
     foodArea(this, foodArr, foodlist, LConfig);
 
+    guide(this, 'guide1');
+
     // /************************************************ 互動事件部分 ************************************************/
 
     dragEvent(this, 'class', undefined, typeRegions, userClassAnswer, null); // 添加拖動事件
@@ -59,6 +62,7 @@ const game2 = {
   preload: function () {
     this.load.image('bg2', `${PATH_UI}/bg/bg_game2.png`);
     this.load.image('plate', `${PATH_UI}/plate_type.png`);
+    this.load.audio('guide2', `${PATH_Audio}/guides/guide2.m4a`);
   },
   create: function () {
     // 背景設置
@@ -92,6 +96,8 @@ const game2 = {
     };
     foodArea(this, foodArr, foodlist, LConfig);
 
+    guide(this, 'guide2');
+
     // /************************************************ 互動事件部分 ************************************************/
 
     dragEvent(this, 'class', undefined, typeRegions, userClassAnswer, null); // 添加拖動事件
@@ -120,6 +126,7 @@ const game3 = {
     this.load.audio('vegetable', `${PATH_Audio}/formulas/formula_vegetable_effect.m4a`);
     this.load.audio('grain', `${PATH_Audio}/formulas/formula_grain_effect.m4a`);
     this.load.audio('formulaList', `${PATH_Audio}/formulas/formula_list_effect.m4a`);
+    this.load.audio('guide3', `${PATH_Audio}/guides/guide3.m4a`);
   },
   create: function () {
     const Size_image = 2 * imageSize; // 食物圖片大小
@@ -161,6 +168,8 @@ const game3 = {
       // 執行開始遊戲函式
       game_play();
     });
+    
+    guide(this, 'guide3');
 
     // /************************************************ 物件設置部分 ************************************************/
 
@@ -223,6 +232,7 @@ const game4 = {
     this.load.image('whi', `${PATH_UI}/colors/white.png`);
     this.load.image('o_y', `${PATH_UI}/colors/orange_and_yellow.png`);
     this.load.image('i_d', `${PATH_UI}/colors/blue_and_purple.png`);
+    this.load.audio('guide4', `${PATH_Audio}/guides/guide4.m4a`);
   },
   create: function () {
     // 背景設置
@@ -259,6 +269,8 @@ const game4 = {
     };
     foodArea(this, foodArr, foodlist, LConfig);
 
+    guide(this, 'guide4');
+
     // /************************************************ 互動事件部分 ************************************************/
 
     dragEvent(this, 'color', undefined, typeRegions, userColorAnswer, null); // 添加拖動事件
@@ -280,6 +292,7 @@ const game5 = {
     this.load.audio('whi', `${PATH_Audio}/colors/white_effect.m4a`);
     this.load.audio('o_y', `${PATH_Audio}/colors/orange_effect.m4a`);
     this.load.audio('i_d', `${PATH_Audio}/colors/indigo_effect.m4a`);
+    this.load.audio('guide5', `${PATH_Audio}/guides/guide5.m4a`);
   },
   create: function () {
     // 背景設置
@@ -331,6 +344,8 @@ const game5 = {
     };
     foodArea(this, foodArr, foodlist, LConfig);
 
+    guide(this, 'guide5');
+
     // /************************************************ 互動事件部分 ************************************************/
 
     dragEvent(this, 'color', undefined, typeRegions, userColorAnswer, null); // 添加拖動事件
@@ -342,6 +357,7 @@ const game6 = {
   preload: function () {
     this.load.image('bg6', `${PATH_UI}/bg/bg_game6.png`);
     this.load.image('plate', `${PATH_UI}/plate_full.png`);
+    this.load.audio('guide6', `${PATH_Audio}/guides/guide6.m4a`);
   },
   create: function () {
     // 背景設置
@@ -472,6 +488,8 @@ const game6 = {
       heigh: IA_H
     };
     foodArea(this, foodArr, foodlist, LConfig);
+
+    guide(this, 'guide6');
 
     // /************************************************ 互動事件部分 ************************************************/
 

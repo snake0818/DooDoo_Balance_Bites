@@ -20,6 +20,8 @@ const game1 = {
     const interactive = this.add.rectangle(GCX, 1.05 * GCY, .72 * WIDTH, .7 * HEIGHT, DefaultCOLOR, BGV).setDepth(Interactive_Depth);
     const [IA_x, IA_cx, IA_X, IA_y, IA_cy, IA_Y, IA_W, IA_H] = getInteractiveAreaMetrics(interactive);
 
+    setBackMenuScene(this);
+
     // /************************************************ 物件設置部分 ************************************************/
     const foodlist = getRandomFoods();
     const foodArr = [];
@@ -71,6 +73,8 @@ const game2 = {
     const interactive = this.add.rectangle(GCX, 1.07 * GCY, .88 * WIDTH, .7 * HEIGHT, DefaultCOLOR, BGV).setDepth(Interactive_Depth);
     const [IA_x, IA_cx, IA_X, IA_y, IA_cy, IA_Y, IA_W, IA_H] = getInteractiveAreaMetrics(interactive);
 
+    setBackMenuScene(this);
+
     // /************************************************ 物件設置部分 ************************************************/
     const foodlist = getRandomFoods();
     const foodArr = [];
@@ -115,10 +119,18 @@ const game3 = {
     this.load.image('formula3', `${PATH_UI}/formulas/formula3.png`);
     this.load.image('formula4', `${PATH_UI}/formulas/formula4.png`);
     this.load.image('formula5', `${PATH_UI}/formulas/formula5.png`);
+    this.load.image('formulaList0', `${PATH_UI}/formulas/formula_list0.png`);
+    this.load.image('formulaList1', `${PATH_UI}/formulas/formula_list1.png`);
+    this.load.image('formulaList2', `${PATH_UI}/formulas/formula_list2.png`);
+    this.load.image('formulaList3', `${PATH_UI}/formulas/formula_list3.png`);
+    this.load.image('formulaList4', `${PATH_UI}/formulas/formula_list4.png`);
+    this.load.image('formulaList5', `${PATH_UI}/formulas/formula_list5.png`);
+    this.load.image('formulaList6', `${PATH_UI}/formulas/formula_list6.png`);
     this.load.image('btn_formulaListPlay', `${PATH_UI}/buttons/btn_formula_list_play.png`);
     this.load.image('btn_gamePlay', `${PATH_UI}/buttons/btn_game_play.png`);
     this.load.image('btn_answer', `${PATH_UI}/buttons/btn_game_answer.png`);
     this.load.image('btn_next', `${PATH_UI}/buttons/btn_game_next.png`);
+
     this.load.audio('nut', `${PATH_Audio}/formulas/formula_nut_effect.m4a`);
     this.load.audio('dairy', `${PATH_Audio}/formulas/formula_dairy_effect.m4a`);
     this.load.audio('meat', `${PATH_Audio}/formulas/formula_meat_effect.m4a`);
@@ -141,27 +153,74 @@ const game3 = {
 
     // 背景設置
     const bg = this.add.image(GCX, GCY, 'bg3').setDisplaySize(WIDTH, HEIGHT);
+    const formula = this.add.image(GCX, GCY - .01 * HEIGHT, 'formulaList0').setDisplaySize(.38 * WIDTH, .53 * HEIGHT);
 
     // 播放口訣按鈕
     let btn_rumor_play = this.add.image(GCX - Size_BTN, 1.65 * GCY, 'btn_formulaListPlay').setDisplaySize(2 * Size_BTN, Size_BTN);
+    setCursor(this, btn_rumor_play);
     btn_rumor_play.setInteractive().on('pointerdown', () => {
       // 若'沒有播放'狀態，則賦予新狀態並播放音訊
-      if (!audioSTATUS) {
+      if (!audioSTATUS && audio_effect_play) {
         audioSTATUS = true; // 賦予狀態
-        audio_formula = this.sound.add('formulaList'); // 添加音訊
+        audio_formula = this.sound.add('formulaList', { volume: audio_volume }); // 添加音訊
+        audio_formula
+          .on('play', () => {
+            let formulaStatus = 0;
+            const timer = this.time.addEvent({
+              delay: 100,
+              loop: true,
+              callback: () => {
+                let status = formulaStatus;
+                const currentTime = audio_formula.seek * 1000; // 當前播放時間（毫秒）
+                const current = Math.floor(currentTime / 100);
+                
+                switch (current) {
+                  case 63:
+                    status = 1;
+                    break;
+                  case 110:
+                    status = 2;
+                    break;
+                  case 157:
+                    status = 3;
+                    break;
+                  case 203:
+                    status = 4;
+                    break;
+                  case 248:
+                    status = 5;
+                    break;
+                  case 292:
+                    status = 6;
+                    break;
+                  case 337:
+                    status = 0;
+                    break;
+                  default:
+                    break;
+                }
+                if (status != formulaStatus) {
+                  formula.setTexture(`formulaList${status}`);
+                  formulaStatus = status;
+                }
+
+                if (!audio_formula.isPlaying) { timer.remove(); } // 如果音效播放完畢，則停止定時器
+              }
+            });
+          })
+          .on('complete', () => { audioSTATUS = false; }); // 播放完畢，清除狀態
         audio_formula.play(); // 播放音訊
-        // 播放完畢，清除狀態
-        audio_formula.on('complete', () => { audioSTATUS = false; });
       }
     });
-
     // 開始遊玩按鈕
     let btn_game_play = this.add.image(GCX + Size_BTN, 1.65 * GCY, 'btn_gamePlay').setDisplaySize(2 * Size_BTN, Size_BTN);
+    setCursor(this, btn_game_play);
     btn_game_play.setInteractive().on('pointerdown', () => {
       // 若'正在播放'狀態，則清除音訊及狀態
       if (audioSTATUS) { audio_formula.destroy(); audioSTATUS = false; }
       // 更換背景
-      bg.setTexture('bg3-1');
+      bg.setTexture('bg3-1').setDisplaySize(WIDTH, HEIGHT);
+      formula.destroy();
       // 清除按鈕
       btn_rumor_play.destroy();
       btn_game_play.destroy();
@@ -170,6 +229,8 @@ const game3 = {
     });
 
     guide(this, 'guide3');
+
+    setBackMenuScene(this);
 
     // /************************************************ 物件設置部分 ************************************************/
 
@@ -187,7 +248,7 @@ const game3 = {
       const typeIndex = types.indexOf(foodType);
       image_formula = this.add.image(GCX, 1.19 * GCY, `formula${typeIndex}`).setDisplaySize(2.5 * Size_image, .6 * Size_image).setVisible(false);
       // 設置對應食物之唸謠音效
-      audio_formula = this.sound.add(foodType);
+      audio_formula = this.sound.add(foodType, { volume: audio_volume });
     }
 
     // 唸謠遊戲
@@ -197,9 +258,10 @@ const game3 = {
 
       // 定義"解答"按鈕元件及其點擊事件
       const BTN_answer = this.add.image(GCX - Size_BTN, 1.5 * GCY, 'btn_answer').setDisplaySize(2 * Size_BTN, Size_BTN);
+      setCursor(this, BTN_answer);
       BTN_answer.setInteractive().on('pointerdown', (pointer) => {
         // 若'沒有播放'狀態
-        if (!audioSTATUS) {
+        if (!audioSTATUS && audio_effect_play) {
           image_formula.setVisible(true); // 顯示唸謠文字圖片
           audioSTATUS = true; // 賦予狀態
           audio_formula.play(); // 播放音訊
@@ -210,6 +272,7 @@ const game3 = {
 
       // 定義"下一個"按鈕元件及其點擊事件
       const BTN_next = this.add.image(GCX + Size_BTN, 1.5 * GCY, 'btn_next').setDisplaySize(2 * Size_BTN, Size_BTN);
+      setCursor(this, BTN_next);
       BTN_next.setInteractive().on('pointerdown', (pointer) => {
         // 清除當前食物相關之元件
         image_food.destroy();
@@ -240,6 +303,8 @@ const game4 = {
     // 互動區域設置
     const interactive = this.add.rectangle(GCX, 1.05 * GCY, .72 * WIDTH, .7 * HEIGHT, DefaultCOLOR, BGV).setDepth(Interactive_Depth);
     const [IA_x, IA_cx, IA_X, IA_y, IA_cy, IA_Y, IA_W, IA_H] = getInteractiveAreaMetrics(interactive);
+
+    setBackMenuScene(this);
 
     // /************************************************ 物件設置部分 ************************************************/
     const foodlist = getRandomFoods(undefined, 'color_fruit_vegetable');
@@ -301,6 +366,8 @@ const game5 = {
     const interactive = this.add.rectangle(GCX, 1.07 * GCY, .88 * WIDTH, .7 * HEIGHT, DefaultCOLOR, BGV).setDepth(Interactive_Depth);
     const [IA_x, IA_cx, IA_X, IA_y, IA_cy, IA_Y, IA_W, IA_H] = getInteractiveAreaMetrics(interactive);
 
+    setBackMenuScene(this);
+
     // /************************************************ 物件設置部分 ************************************************/
     const foodlist = getRandomFoods(undefined, 'color_fruit_vegetable');
     const foodArr = [];
@@ -327,7 +394,7 @@ const game5 = {
       // 設置區域為可交互並添加點擊事件
       region.bounds.setInteractive().on('pointerdown', (pointer) => {
         if (EffectCompleted) {
-          const soundEffect = this.sound.add(region.name)
+          const soundEffect = this.sound.add(region.name, { volume: audio_volume })
           EffectCompleted = false;
           soundEffect.play();
           soundEffect.on('complete', () => { EffectCompleted = true; })
@@ -365,6 +432,8 @@ const game6 = {
     // 互動區域設置
     const interactive = this.add.rectangle(GCX, 1.07 * GCY, .88 * WIDTH, .7 * HEIGHT, DefaultCOLOR, BGV).setDepth(Interactive_Depth);
     const [IA_x, IA_cx, IA_X, IA_y, IA_cy, IA_Y, IA_W, IA_H] = getInteractiveAreaMetrics(interactive);
+
+    setBackMenuScene(this);
 
     // /************************************************ 物件設置部分 ************************************************/
     // 食物分類區域
@@ -535,29 +604,16 @@ const MainMenu = {
     const Size_BTN = 1.5 * imageSize; // 按鈕圖片大小
     // 設置背景
     const bg = this.add.image(GCX, GCY, 'start').setDisplaySize(WIDTH, HEIGHT);
-    // 設置'開始遊戲'按鈕
-    this.time.delayedCall(100, () => {
-      const btn_game_start = this.add.image(GCX, 1.45 * GCY, 'btn_gameStart').setDisplaySize(2 * Size_BTN, Size_BTN);
-      // '開始遊戲'按鈕點擊事件
-      btn_game_start.setInteractive().on('pointerup', () => {
-        // // 清除背景及按鈕
-        // bg.destroy();
-        btn_game_start.destroy();
-        // 選擇遊戲
-        selectGame();
-      });
-    });
-    
-    if(!this.firstGuidePlayed) guide(this, 'audio_start');
 
+    // 定義選擇遊戲
     const selectGame = () => {
       let audio; // 宣告播放音效元素
       let audioSTATUS = false; // 宣告用於表示音訊播放狀態
 
       // 背景設置
       bg.setTexture('bg').setDisplaySize(WIDTH, HEIGHT);
-      
-      if(!this.firstGuidePlayed) guide(this, 'audio_select', true);
+
+      if (!this.firstGuidePlayed) guide(this, 'audio_select', true);
       this.firstGuidePlayed = true;
 
       // 互動區域設置
@@ -586,9 +642,10 @@ const MainMenu = {
         const dx = IA_x + .375 * IA_W * (i % 3) + .5 * btn_w;
         const dy = (i < 3) ? IA_y + .6 * btn_h : IA_Y - .6 * btn_h;
         typeRegions[i].bounds = this.add.image(dx, dy, `btn_${typeRegions[i].name}`).setDisplaySize(btn_w, btn_h);
+        setCursor(this, typeRegions[i].bounds);
         // 點擊事件
         typeRegions[i].bounds.setInteractive()
-          .on('pointerdown', () => {
+          .on('pointerup', () => {
             // 確保沒有播放音訊
             if (audioSTATUS) {
               audio.stop();
@@ -604,10 +661,10 @@ const MainMenu = {
             GamingID = GamingName;
           })
           .on('pointerover', () => {
-            if (!audioSTATUS) {
+            if (!audioSTATUS && audio_effect_play) {
               audioSTATUS = true;
               // 播放音效
-              audio = this.sound.add(`audio_title${i + 1}`);
+              audio = this.sound.add(`audio_title${i + 1}`, { volume: audio_volume });
               audio.play();
 
               // 音效播放結束
@@ -619,6 +676,20 @@ const MainMenu = {
       }
     }
 
+    if (!this.firstGuidePlayed) {
+      // 設置'開始遊戲'按鈕
+      this.time.delayedCall(100, () => {
+        const btn_game_start = this.add.image(GCX, 1.45 * GCY, 'btn_gameStart').setDisplaySize(2 * Size_BTN, Size_BTN);
+        setCursor(this, btn_game_start);
+        // '開始遊戲'按鈕點擊事件
+        btn_game_start.setInteractive().on('pointerup', () => {
+          btn_game_start.destroy();
+          // 選擇遊戲
+          selectGame();
+        });
+      });
+      guide(this, 'audio_start');
+    } else { selectGame(); }
   }
 }
 

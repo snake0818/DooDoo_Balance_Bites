@@ -1,7 +1,7 @@
 // ****************************** 參數定義 ****************************** //
 
 // 網站路徑
-const webPath = window.location.pathname.split('/').slice(0, -1).join('/');
+const webPath = window.location.pathname.split('/').slice(0, -1).join('/') + '/';
 // 資源路徑
 const resourcePATH = 'public';
 const PATH_UI = `${resourcePATH}/images/ui`;
@@ -14,6 +14,7 @@ const [GCX, GCY] = [WIDTH / 2, HEIGHT / 2];   // 全域中心點
 const DefaultNumOfFood = 8;  // 食物數量
 const imageSize = 0.1 * HEIGHT;  // 圖片大小
 let food_size = null;
+const audio_volume = 0.3;
 
 // 設置限制
 const foodSet = { nut: 3, dairy: 3, meat: 11, vegetable: 13, fruit: 14, grain: 9 };
@@ -55,6 +56,7 @@ const GeneralPreload = (scene) => {
   scene.load.image('wrong', `${PATH_UI}/wrong.png`);
   scene.load.image('btn_home', `${PATH_UI}/buttons/btn_home_page.png`);
   scene.load.image('btn_again', `${PATH_UI}/buttons/btn_play_again.png`);
+  scene.load.image('btn_back', `${PATH_UI}/back.png`);
   // 食物
   scene.load.image('nut0', `${PATH_Foods}/nuts/nut0.png`);
   scene.load.image('nut1', `${PATH_Foods}/nuts/nut1.png`);
@@ -170,10 +172,11 @@ const endGame = (scene, userAnswer = null) => {
   });
 }
 
+// 引導語音播放
 const guide = (scene, audioName) => {
   if (audio_effect_play) {
     const bg = scene.add.rectangle(GCX, GCY, WIDTH, HEIGHT, 0xffffff, 0).setDepth(1).setInteractive();
-    const audio_guide = scene.sound.add(audioName);
+    const audio_guide = scene.sound.add(audioName, { volume: audio_volume });
     audio_guide.play();
     audio_guide.on('complete', () => {
       bg.destroy();
@@ -312,6 +315,30 @@ const getInteractiveAreaMetrics = (interactive) => {
   return Metrics;
 }
 
+// 設置鼠標樣式變化
+const setCursor = (scene, buttonElement) => {
+  buttonElement
+    .on('pointerover', () => { scene.input.setDefaultCursor('pointer'); })
+    .on('pointerout', () => { scene.input.setDefaultCursor('default'); })
+    .on('pointerup', () => { scene.input.setDefaultCursor('default'); })
+    .on('dragend', () => { scene.input.setDefaultCursor('default'); })
+}
+
+// 返回場景
+const setBackMenuScene = (scene) => {
+  const [positionX, positionY] = [.035 * WIDTH, .075 * HEIGHT];
+  const size = .06 * WIDTH;
+  const back = scene.add.image(positionX, positionY, 'btn_back').setDisplaySize(size, size).setOrigin(0).setInteractive();
+  setCursor(scene, back);
+  back.on('pointerdown', () => {
+    GamingID = null;
+    const mainMenuScene = scene.scene.get('MainMenu');
+    if (mainMenuScene) { mainMenuScene.firstGuidePlayed = true; }
+    scene.scene.stop(GamingName);
+    scene.scene.start('MainMenu');
+  })
+}
+
 // ************************************************** Action ************************************************** //
 
 // 隨機食物
@@ -375,7 +402,7 @@ const showResultView = (scene, keyword) => {
   if (audio_effect_play) {
     const rect = scene.add.rectangle(GCX, GCY, WIDTH, HEIGHT, 0x0, 0.5).setInteractive();
     const image = scene.add.image(GCX, GCY, keyword).setDisplaySize(GCY, GCY);
-    scene.sound.add(keyword).play();
+    scene.sound.add(keyword, { volume: audio_volume }).play();
     fade(scene, rect, image);
   }
 }

@@ -144,7 +144,10 @@ const foodArea = (scene, foodArr, foodlist, layoutConfig) => {
 const endGame = (scene, userAnswer = null) => {
   // 停止計時，並送出紀錄資訊
   stopTimer();
-  sendRecord(GamingID, NumOfError, PlayTime);
+  if (typeof sendRecord === 'function') {
+    try { if (userAnswer !== null) sendRecord(GamingID, NumOfError, PlayTime); }
+    catch (error) { console.error("送出紀錄資訊時發生錯誤: ", error); }
+  } else { console.warn("sendRecord 函數未定義!"); }
   // 清除資料
   NumOfError = 0;
   if (userAnswer) Object.keys(userAnswer).forEach(category => { userAnswer[category].length = 0; });
@@ -155,21 +158,29 @@ const endGame = (scene, userAnswer = null) => {
     const backWeb = scene.add.image(GCX - .1 * WIDTH, GCY + .25 * HEIGHT, 'btn_home').setDisplaySize(3 * imageSize, 1.5 * imageSize);
     const again = scene.add.image(GCX + .1 * WIDTH, GCY + .25 * HEIGHT, 'btn_again').setDisplaySize(3 * imageSize, 1.5 * imageSize);
     // '返回網站'按鈕點擊事件，回到主選單場景
-    backWeb.setInteractive().on('pointerdown', () => { GamingID = null; scene.scene.stop(GamingName); scene.scene.start('MainMenu'); });
+    backWeb.setInteractive().on('pointerdown', () => {
+      GamingID = null;
+      const mainMenuScene = scene.scene.get('MainMenu');
+      if (mainMenuScene) { mainMenuScene.firstGuidePlayed = true; }
+      scene.scene.stop(GamingName);
+      scene.scene.start('MainMenu');
+    });
     // '再次遊玩'按鈕點擊事件，再次啟用當前遊戲場景
     again.setInteractive().on('pointerdown', () => { scene.scene.start(GamingName); });
   });
 }
 
 const guide = (scene, audioName) => {
-  const bg = scene.add.rectangle(GCX, GCY, WIDTH, HEIGHT, 0xffffff, 0).setDepth(1).setInteractive();
-  const audio_guide = scene.sound.add(audioName);
-  audio_guide.play();
-  audio_guide.on('complete', () => {
-    bg.destroy();
-    audio_guide.destroy();
-    startTimer();
-  });
+  if (audio_effect_play) {
+    const bg = scene.add.rectangle(GCX, GCY, WIDTH, HEIGHT, 0xffffff, 0).setDepth(1).setInteractive();
+    const audio_guide = scene.sound.add(audioName);
+    audio_guide.play();
+    audio_guide.on('complete', () => {
+      bg.destroy();
+      audio_guide.destroy();
+      startTimer();
+    });
+  }
 }
 
 // 定義拖動事件

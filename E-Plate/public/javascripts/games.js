@@ -168,7 +168,7 @@ const game3 = {
       // 執行開始遊戲函式
       game_play();
     });
-    
+
     guide(this, 'guide3');
 
     // /************************************************ 物件設置部分 ************************************************/
@@ -512,6 +512,7 @@ const MainMenu = {
     this.load.on('complete', () => { loadingText.setText('Loading complete!'); loadingText.destroy(); });
 
     // 加載資源
+    if (this.firstGuidePlayed === undefined) { this.firstGuidePlayed = false; }
     GeneralPreload(this);
     this.load.image('bg', `${PATH_UI}/bg/bg_game_menu.png`)
     this.load.image('btn_gameStart', `${PATH_UI}/buttons/btn_game_start.png`);
@@ -527,6 +528,8 @@ const MainMenu = {
     this.load.audio('audio_title4', `${PATH_Audio}/titles/game_title4.m4a`);
     this.load.audio('audio_title5', `${PATH_Audio}/titles/game_title5.m4a`);
     this.load.audio('audio_title6', `${PATH_Audio}/titles/game_title6.m4a`);
+    this.load.audio('audio_start', `${PATH_Audio}/guides/guide_start.m4a`);
+    this.load.audio('audio_select', `${PATH_Audio}/guides/guide_game_select.m4a`);
   },
   create: function () {
     const Size_BTN = 1.5 * imageSize; // 按鈕圖片大小
@@ -544,6 +547,8 @@ const MainMenu = {
         selectGame();
       });
     });
+    
+    if(!this.firstGuidePlayed) guide(this, 'audio_start');
 
     const selectGame = () => {
       let audio; // 宣告播放音效元素
@@ -551,6 +556,10 @@ const MainMenu = {
 
       // 背景設置
       bg.setTexture('bg').setDisplaySize(WIDTH, HEIGHT);
+      
+      if(!this.firstGuidePlayed) guide(this, 'audio_select', true);
+      this.firstGuidePlayed = true;
+
       // 互動區域設置
       const interactive = this.add.rectangle(GCX, GCY, .75 * WIDTH, .4 * HEIGHT, DefaultCOLOR, SHOW).setDepth(Interactive_Depth);
       const [IA_x, IA_cx, IA_X, IA_y, IA_cy, IA_Y, IA_W, IA_H] = [

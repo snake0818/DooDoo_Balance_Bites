@@ -1,7 +1,7 @@
-const webPath = window.location.pathname.split('/').slice(0, -1).join('/');
+const webPath = window.location.pathname.split('/').slice(0, -1).join('/') + '/';
 document.getElementById('webTitle').href = webPath;
 document.getElementById('home').href = webPath;
-document.getElementById('record').href = `${webPath}/record.html`;
+document.getElementById('record').href = `${webPath}record.html`;
 
 $(function () {
   let audio;
@@ -12,7 +12,7 @@ $(function () {
     game_frame.on('load', function () {
       const iframeContent = this.contentWindow;
       // 檢查新的 src 是否為根路徑 webPath
-      if (iframeContent.location.pathname === `${webPath}/`) {
+      if (iframeContent.location.pathname === `${webPath}`) {
         // 清除先前的內容
         iframeContent.document.body.innerHTML = '';
         // 隱藏元素
@@ -20,6 +20,6 @@ $(function () {
         game_title.addClass('d-none');
       }
     });
-    game_frame.attr('src', `${webPath}/game.html`);
+    game_frame.attr('src', `${webPath}game.html`);
   }
 });

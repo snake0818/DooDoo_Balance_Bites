@@ -173,7 +173,7 @@ const game3 = {
                 let status = formulaStatus;
                 const currentTime = audio_formula.seek * 1000; // 當前播放時間（毫秒）
                 const current = Math.floor(currentTime / 100);
-                
+
                 switch (current) {
                   case 63:
                     status = 1;
@@ -671,6 +671,13 @@ const MainMenu = {
               audio.on('complete', () => {
                 audioSTATUS = false;
               });
+            }
+          })
+          .on('pointerout', () => {
+            if (audioSTATUS) {
+              audio.stop();
+              audio.destroy();
+              audioSTATUS = false;
             }
           });
       }

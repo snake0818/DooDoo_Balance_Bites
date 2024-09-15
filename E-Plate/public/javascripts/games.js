@@ -63,7 +63,7 @@ const game2 = {
   key: 'game2',
   preload: function () {
     this.load.image('bg2', `${PATH_UI}/bg/bg_game2.png`);
-    this.load.image('plate', `${PATH_UI}/plate_type.png`);
+    this.load.image('plateT', `${PATH_UI}/plate_type.png`);
     this.load.audio('guide2', `${PATH_Audio}/guides/guide2.m4a`);
   },
   create: function () {
@@ -81,7 +81,7 @@ const game2 = {
 
     // 食物分類區域
     const [pw, ph] = [.7 * IA_W, IA_H];
-    const plate = this.add.image(IA_x + .5 * pw, IA_cy, 'plate').setDisplaySize(pw, ph);
+    const plate = this.add.image(IA_x + .5 * pw, IA_cy, 'plateT').setDisplaySize(pw, ph);
     const typeRegions = [
       { name: 'nut', bounds: this.add.rectangle(IA_x + .615 * pw, .635 * IA_cy, .22 * pw, .22 * ph, DefaultCOLOR, SHOW), text: '堅果類' },
       { name: 'dairy', bounds: this.add.rectangle(IA_x + .84 * pw, .635 * IA_cy, .15 * pw, .22 * ph, DefaultCOLOR, SHOW), text: '乳品類' },
@@ -423,7 +423,7 @@ const game6 = {
   key: 'game6',
   preload: function () {
     this.load.image('bg6', `${PATH_UI}/bg/bg_game6.png`);
-    this.load.image('plate', `${PATH_UI}/plate_full.png`);
+    this.load.image('plateF', `${PATH_UI}/plate_full.png`);
     this.load.audio('guide6', `${PATH_Audio}/guides/guide6.m4a`);
   },
   create: function () {
@@ -438,7 +438,7 @@ const game6 = {
     // /************************************************ 物件設置部分 ************************************************/
     // 食物分類區域
     const [pw, ph] = [.7 * IA_W, IA_H];
-    const plate = this.add.image(IA_x + .5 * pw, IA_cy, 'plate').setDisplaySize(pw, ph);
+    const plate = this.add.image(IA_x + .5 * pw, IA_cy, 'plateF').setDisplaySize(pw, ph);
     const typeRegions = [
       {
         bounds: this.add.rectangle(IA_x + .615 * pw, .635 * IA_cy, .22 * pw, .22 * ph, DefaultCOLOR, SHOW),

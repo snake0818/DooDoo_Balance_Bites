@@ -173,10 +173,10 @@ const endGame = (scene, userAnswer = null) => {
 }
 
 // 引導語音播放
-const guide = (scene, audioName) => {
+const guide = (scene, audioName, volume = audio_volume) => {
   if (audio_effect_play) {
     const bg = scene.add.rectangle(GCX, GCY, WIDTH, HEIGHT, 0xffffff, 0).setDepth(1).setInteractive();
-    const audio_guide = scene.sound.add(audioName, { volume: audio_volume });
+    const audio_guide = scene.sound.add(audioName, { volume: volume });
     audio_guide.play();
     audio_guide.on('complete', () => {
       bg.destroy();

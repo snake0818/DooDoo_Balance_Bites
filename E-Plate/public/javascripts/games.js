@@ -100,7 +100,7 @@ const game2 = {
     };
     foodArea(this, foodArr, foodlist, LConfig);
 
-    guide(this, 'guide2');
+    guide(this, 'guide2', 1);
 
     // /************************************************ 互動事件部分 ************************************************/
 

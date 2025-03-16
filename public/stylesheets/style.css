@@ -1,0 +1,33 @@
+body {
+  padding-top: 20px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+
+#pinyin {
+  writing-mode: vertical-rl !important;
+}
+
+#tone {
+  writing-mode: horizontal-tb !important;
+}
+
+rt {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#ctrl .btn {
+  color: #ffffff;
+  background-color: #055765;
+}
+
+#ctrl .btn:hover {
+  color: #ffffff;
+  background-color: #277987;
+}

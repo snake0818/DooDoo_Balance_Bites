@@ -701,7 +701,7 @@ const MainMenu = {
 }
 
 const config = {
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   width: WIDTH,
   height: HEIGHT,
   parent: 'app',

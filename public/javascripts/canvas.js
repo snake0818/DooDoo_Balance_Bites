@@ -9,7 +9,7 @@ const PATH_Foods = `${resourcePATH}/images/foods`;
 const PATH_Audio = `${resourcePATH}/audios`;
 
 // 全域參數設置
-const [WIDTH, HEIGHT] = [7680, 4320];   // 全域寬高
+const [WIDTH, HEIGHT] = [1600 , 900];   // 全域寬高
 const [GCX, GCY] = [WIDTH / 2, HEIGHT / 2];   // 全域中心點
 const DefaultNumOfFood = 8;  // 食物數量
 const imageSize = 0.1 * HEIGHT;  // 圖片大小
@@ -36,7 +36,7 @@ let GamingID = null, NumOfError = 0, PlayTime = 0;
 
 // 測試用參數
 const audio_effect_play = true;
-const [DefaultCOLOR, SHOW, BGV] = ['0x000000', false, false];
+const [DefaultCOLOR, SHOW, BGV] = ['0x000000', 0, 0];
 const Interactive_Depth = 0;
 
 // ************************************************** Function ************************************************** //

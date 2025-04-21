@@ -1,0 +1,229 @@
+{
+  "frames": {
+    "bg_End": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg_Game1": {
+      "frame": {
+        "x": 0,
+        "y": 2160,
+        "w": 3840,
+        "h": 2160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg_Game2": {
+      "frame": {
+        "x": 0,
+        "y": 4320,
+        "w": 3840,
+        "h": 2160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg_Game3_1": {
+      "frame": {
+        "x": 3840,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg_Game3": {
+      "frame": {
+        "x": 7680,
+        "y": 0,
+        "w": 3840,
+        "h": 2155
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2155
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg_Game4": {
+      "frame": {
+        "x": 7680,
+        "y": 2155,
+        "w": 3840,
+        "h": 2160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg_Game5": {
+      "frame": {
+        "x": 3840,
+        "y": 2160,
+        "w": 3840,
+        "h": 2160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg_Game6": {
+      "frame": {
+        "x": 3840,
+        "y": 4320,
+        "w": 3840,
+        "h": 2160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "bg_Menu": {
+      "frame": {
+        "x": 7680,
+        "y": 4315,
+        "w": 3840,
+        "h": 2160
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 3840,
+        "h": 2160
+      },
+      "sourceSize": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "image": "backgrounds.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 11520,
+      "h": 6480
+    },
+    "scale": 1
+  }
+}

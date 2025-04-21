@@ -1,0 +1,157 @@
+{
+  "frames": {
+    "rhyme_nut": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 379,
+        "h": 88
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 379,
+        "h": 88
+      },
+      "sourceSize": {
+        "w": 379,
+        "h": 88
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_dairy": {
+      "frame": {
+        "x": 0,
+        "y": 88,
+        "w": 379,
+        "h": 88
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 379,
+        "h": 88
+      },
+      "sourceSize": {
+        "w": 379,
+        "h": 88
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_meat": {
+      "frame": {
+        "x": 0,
+        "y": 176,
+        "w": 379,
+        "h": 88
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 379,
+        "h": 88
+      },
+      "sourceSize": {
+        "w": 379,
+        "h": 88
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_vegetable": {
+      "frame": {
+        "x": 0,
+        "y": 264,
+        "w": 379,
+        "h": 88
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 379,
+        "h": 88
+      },
+      "sourceSize": {
+        "w": 379,
+        "h": 88
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_fruit": {
+      "frame": {
+        "x": 0,
+        "y": 352,
+        "w": 379,
+        "h": 88
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 379,
+        "h": 88
+      },
+      "sourceSize": {
+        "w": 379,
+        "h": 88
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_grain": {
+      "frame": {
+        "x": 0,
+        "y": 440,
+        "w": 379,
+        "h": 88
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 379,
+        "h": 88
+      },
+      "sourceSize": {
+        "w": 379,
+        "h": 88
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "image": "rhyme.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 379,
+      "h": 528
+    },
+    "scale": 1
+  }
+}

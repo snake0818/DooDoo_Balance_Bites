@@ -1,0 +1,181 @@
+{
+  "frames": {
+    "rhyme_list0": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 1259,
+        "h": 1172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 168,
+        "y": 3,
+        "w": 1259,
+        "h": 1172
+      },
+      "sourceSize": {
+        "w": 1591,
+        "h": 1302
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_list1": {
+      "frame": {
+        "x": 1259,
+        "y": 0,
+        "w": 1259,
+        "h": 1172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 167,
+        "y": 3,
+        "w": 1259,
+        "h": 1172
+      },
+      "sourceSize": {
+        "w": 1591,
+        "h": 1302
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_list2": {
+      "frame": {
+        "x": 2518,
+        "y": 0,
+        "w": 1259,
+        "h": 1172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 167,
+        "y": 3,
+        "w": 1259,
+        "h": 1172
+      },
+      "sourceSize": {
+        "w": 1591,
+        "h": 1302
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_list3": {
+      "frame": {
+        "x": 3777,
+        "y": 0,
+        "w": 1259,
+        "h": 1172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 168,
+        "y": 3,
+        "w": 1259,
+        "h": 1172
+      },
+      "sourceSize": {
+        "w": 1591,
+        "h": 1302
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_list4": {
+      "frame": {
+        "x": 5036,
+        "y": 0,
+        "w": 1259,
+        "h": 1173
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 167,
+        "y": 2,
+        "w": 1259,
+        "h": 1173
+      },
+      "sourceSize": {
+        "w": 1591,
+        "h": 1301
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_list5": {
+      "frame": {
+        "x": 6295,
+        "y": 0,
+        "w": 1259,
+        "h": 1173
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 167,
+        "y": 2,
+        "w": 1259,
+        "h": 1173
+      },
+      "sourceSize": {
+        "w": 1591,
+        "h": 1301
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_list6": {
+      "frame": {
+        "x": 7554,
+        "y": 0,
+        "w": 1259,
+        "h": 1173
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 168,
+        "y": 2,
+        "w": 1259,
+        "h": 1173
+      },
+      "sourceSize": {
+        "w": 1591,
+        "h": 1301
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "image": "rhyme_list.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 8813,
+      "h": 1173
+    },
+    "scale": 1
+  }
+}

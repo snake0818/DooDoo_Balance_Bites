@@ -1,33 +1,14 @@
+html,
 body {
-  padding-top: 20px;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
-}
-
-
-
-#pinyin {
-  writing-mode: vertical-rl !important;
-}
-
-#tone {
-  writing-mode: horizontal-tb !important;
-}
-
-rt {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-#ctrl .btn {
-  color: #ffffff;
-  background-color: #055765;
-}
-
-#ctrl .btn:hover {
-  color: #ffffff;
-  background-color: #277987;
+  color: #00b7ff;
 }

@@ -17,33 +17,15 @@
   <script src="./public/javascripts/lib/supabase-js.js"></script>
   <script src="public/javascripts/supabaseAPI.js"></script>
 
-  <link rel="stylesheet" href="./public/stylesheets/style.css">
   <link rel="stylesheet" href="./public/stylesheets/navbar.css">
+  <script src="./public/javascripts/navbar.js"></script>
+
+  <link rel="stylesheet" href="./public/stylesheets/style.css">
 </head>
 
-<body style="font-family:標楷體;">
-  <!-- 包含產生導覽列所需的標頭檔 -->
-  <!-- 產生一個導覽列(Navigation Bar) -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info">
-    <div class="container-fluid">
-      <a id="webTitle" class="navbar-brand fs-4"><img src="./public/images/ui/titles/game_title.png" height="30px"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span
-          class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item"> <a id="home" class="nav-link">首頁</a></li>
-          <li class="nav-item"> <a id="record" class="nav-link">紀錄</a></li>
-        </ul>
-        <div class="fs-5">康寧大學幼保系陳麗珠團隊製作</div>
-      </div>
-    </div>
-  </nav>
-
+<body style="font-family:標楷體;margin-top: 30px;">
   <!-- 以下為操作介面UI之設計 -->
   <div class="container mt-5 p-0" style="text-align:center;">
-
     <div class="alert alert-warning">
       <div class="row">
         <div class="col-3  text-center">
@@ -61,14 +43,13 @@
         <div>
         </div>
       </div>
-
     </div>
-
   </div>
 </body>
 
-<script src="./public/javascripts/index.js"></script>
-<script src="./public/javascripts/recordlist.js"></script>
-<script>$(function () { getItemList(); })</script>
+<script src="./public/javascripts/gameRecord.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => { getItemList(); });
+</script>
 
 </html>

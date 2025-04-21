@@ -2,22 +2,66 @@ html,
 body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0);
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+}
+
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+#game {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 40px;
 }
 
 #app {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+  transform-origin: center center;
+}
+#app.rotate {
+  transform: rotate(90deg);
+  transform-origin: center center;
 }
 
-canvas {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100vw;
-  max-height: 100vh;
+/* 不使用 css 控制 canvas，減少偏差發生 */
+/* #app canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+} */
+
+#rotate-warning {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
 }

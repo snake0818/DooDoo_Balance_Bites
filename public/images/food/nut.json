@@ -1,0 +1,72 @@
+{
+  "frames": {
+    "nut0": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 500,
+        "h": 500
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 500,
+        "h": 500
+      },
+      "sourceSize": {
+        "w": 500,
+        "h": 500
+      }
+    },
+    "nut1": {
+      "frame": {
+        "x": 500,
+        "y": 0,
+        "w": 500,
+        "h": 500
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 500,
+        "h": 500
+      },
+      "sourceSize": {
+        "w": 500,
+        "h": 500
+      }
+    },
+    "nut2": {
+      "frame": {
+        "x": 1000,
+        "y": 0,
+        "w": 500,
+        "h": 500
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 500,
+        "h": 500
+      },
+      "sourceSize": {
+        "w": 500,
+        "h": 500
+      }
+    }
+  },
+  "meta": {
+    "image": "nut.webp",
+    "size": {
+      "w": 1500,
+      "h": 500
+    },
+    "scale": "0.25"
+  }
+}

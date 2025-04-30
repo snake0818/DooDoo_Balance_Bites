@@ -4,44 +4,20 @@
       "frame": {
         "x": 0,
         "y": 0,
-        "w": 379,
-        "h": 88
+        "w": 3160,
+        "h": 446
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 379,
-        "h": 88
+        "x": 106,
+        "y": 47,
+        "w": 3160,
+        "h": 446
       },
       "sourceSize": {
-        "w": 379,
-        "h": 88
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "rhyme_dairy": {
-      "frame": {
-        "x": 0,
-        "y": 88,
-        "w": 379,
-        "h": 88
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 379,
-        "h": 88
-      },
-      "sourceSize": {
-        "w": 379,
-        "h": 88
+        "w": 3334,
+        "h": 529
       },
       "pivot": {
         "x": 0.5,
@@ -51,45 +27,21 @@
     "rhyme_meat": {
       "frame": {
         "x": 0,
-        "y": 176,
-        "w": 379,
-        "h": 88
+        "y": 446,
+        "w": 3139,
+        "h": 462
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 379,
-        "h": 88
+        "x": 86,
+        "y": 44,
+        "w": 3139,
+        "h": 462
       },
       "sourceSize": {
-        "w": 379,
-        "h": 88
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "rhyme_vegetable": {
-      "frame": {
-        "x": 0,
-        "y": 264,
-        "w": 379,
-        "h": 88
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 379,
-        "h": 88
-      },
-      "sourceSize": {
-        "w": 379,
-        "h": 88
+        "w": 3334,
+        "h": 529
       },
       "pivot": {
         "x": 0.5,
@@ -99,21 +51,21 @@
     "rhyme_fruit": {
       "frame": {
         "x": 0,
-        "y": 352,
-        "w": 379,
-        "h": 88
+        "y": 908,
+        "w": 3136,
+        "h": 506
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 379,
-        "h": 88
+        "x": 130,
+        "y": 11,
+        "w": 3136,
+        "h": 506
       },
       "sourceSize": {
-        "w": 379,
-        "h": 88
+        "w": 3334,
+        "h": 529
       },
       "pivot": {
         "x": 0.5,
@@ -123,21 +75,69 @@
     "rhyme_grain": {
       "frame": {
         "x": 0,
-        "y": 440,
-        "w": 379,
-        "h": 88
+        "y": 1414,
+        "w": 3121,
+        "h": 478
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 379,
-        "h": 88
+        "x": 104,
+        "y": 31,
+        "w": 3121,
+        "h": 478
       },
       "sourceSize": {
-        "w": 379,
-        "h": 88
+        "w": 3334,
+        "h": 529
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_dairy": {
+      "frame": {
+        "x": 0,
+        "y": 1892,
+        "w": 3131,
+        "h": 459
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 142,
+        "y": 34,
+        "w": 3131,
+        "h": 459
+      },
+      "sourceSize": {
+        "w": 3334,
+        "h": 529
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_vegetable": {
+      "frame": {
+        "x": 0,
+        "y": 2351,
+        "w": 3164,
+        "h": 486
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 109,
+        "y": 16,
+        "w": 3164,
+        "h": 486
+      },
+      "sourceSize": {
+        "w": 3334,
+        "h": 529
       },
       "pivot": {
         "x": 0.5,
@@ -146,11 +146,11 @@
     }
   },
   "meta": {
-    "image": "rhyme.png",
+    "image": "rhymes.png",
     "format": "RGBA8888",
     "size": {
-      "w": 379,
-      "h": 528
+      "w": 3164,
+      "h": 2837
     },
     "scale": 1
   }

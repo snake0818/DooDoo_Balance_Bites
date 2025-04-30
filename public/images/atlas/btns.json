@@ -1,23 +1,71 @@
 {
   "frames": {
-    "game_play": {
+    "next": {
       "frame": {
         "x": 0,
         "y": 0,
-        "w": 678,
-        "h": 333
+        "w": 1662,
+        "h": 700
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 5,
-        "y": 5,
-        "w": 678,
-        "h": 333
+        "x": 0,
+        "y": 0,
+        "w": 1662,
+        "h": 700
       },
       "sourceSize": {
-        "w": 689,
-        "h": 342
+        "w": 1662,
+        "h": 701
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "answer": {
+      "frame": {
+        "x": 1662,
+        "y": 0,
+        "w": 1662,
+        "h": 700
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 1662,
+        "h": 700
+      },
+      "sourceSize": {
+        "w": 1662,
+        "h": 701
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "game_play": {
+      "frame": {
+        "x": 0,
+        "y": 700,
+        "w": 1662,
+        "h": 700
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 1662,
+        "h": 700
+      },
+      "sourceSize": {
+        "w": 1662,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -26,22 +74,22 @@
     },
     "play_rhyme": {
       "frame": {
-        "x": 0,
-        "y": 333,
-        "w": 677,
-        "h": 333
+        "x": 1662,
+        "y": 700,
+        "w": 1662,
+        "h": 700
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 6,
-        "y": 5,
-        "w": 677,
-        "h": 333
+        "x": 0,
+        "y": 0,
+        "w": 1662,
+        "h": 700
       },
       "sourceSize": {
-        "w": 689,
-        "h": 342
+        "w": 1662,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -51,45 +99,21 @@
     "game_start": {
       "frame": {
         "x": 0,
-        "y": 666,
-        "w": 719,
-        "h": 332
+        "y": 1400,
+        "w": 1662,
+        "h": 700
       },
       "rotated": false,
       "trimmed": true,
       "spriteSourceSize": {
-        "x": 5,
-        "y": 5,
-        "w": 719,
-        "h": 332
-      },
-      "sourceSize": {
-        "w": 729,
-        "h": 342
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "answer": {
-      "frame": {
-        "x": 678,
+        "x": 0,
         "y": 0,
-        "w": 678,
-        "h": 332
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 5,
-        "y": 5,
-        "w": 678,
-        "h": 332
+        "w": 1662,
+        "h": 700
       },
       "sourceSize": {
-        "w": 689,
-        "h": 342
+        "w": 1662,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -98,46 +122,22 @@
     },
     "home_page": {
       "frame": {
-        "x": 678,
-        "y": 332,
-        "w": 678,
-        "h": 332
+        "x": 1662,
+        "y": 1400,
+        "w": 1662,
+        "h": 701
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 5,
-        "y": 5,
-        "w": 678,
-        "h": 332
+        "x": 0,
+        "y": 0,
+        "w": 1662,
+        "h": 701
       },
       "sourceSize": {
-        "w": 688,
-        "h": 342
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "next": {
-      "frame": {
-        "x": 719,
-        "y": 664,
-        "w": 678,
-        "h": 332
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 5,
-        "y": 5,
-        "w": 678,
-        "h": 332
-      },
-      "sourceSize": {
-        "w": 688,
-        "h": 342
+        "w": 1662,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -146,22 +146,22 @@
     },
     "play_again": {
       "frame": {
-        "x": 1356,
-        "y": 0,
-        "w": 678,
-        "h": 332
+        "x": 0,
+        "y": 2100,
+        "w": 1662,
+        "h": 701
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 5,
-        "y": 5,
-        "w": 678,
-        "h": 332
+        "x": 0,
+        "y": 0,
+        "w": 1662,
+        "h": 701
       },
       "sourceSize": {
-        "w": 688,
-        "h": 342
+        "w": 1662,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -170,22 +170,22 @@
     },
     "back": {
       "frame": {
-        "x": 1356,
-        "y": 332,
-        "w": 287,
-        "h": 270
+        "x": 1662,
+        "y": 2101,
+        "w": 745,
+        "h": 701
       },
       "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 287,
-        "h": 270
+        "w": 745,
+        "h": 701
       },
       "sourceSize": {
-        "w": 287,
-        "h": 270
+        "w": 745,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -197,8 +197,8 @@
     "image": "btns.png",
     "format": "RGBA8888",
     "size": {
-      "w": 2034,
-      "h": 998
+      "w": 3324,
+      "h": 2802
     },
     "scale": 1
   }

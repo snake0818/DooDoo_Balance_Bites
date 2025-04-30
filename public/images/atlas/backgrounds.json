@@ -72,7 +72,7 @@
         "y": 0.5
       }
     },
-    "bg_Game3_1": {
+    "bg_Game3": {
       "frame": {
         "x": 3840,
         "y": 0,
@@ -96,20 +96,20 @@
         "y": 0.5
       }
     },
-    "bg_Game3": {
+    "bg_Game3_1": {
       "frame": {
         "x": 7680,
         "y": 0,
         "w": 3840,
-        "h": 2155
+        "h": 2160
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
         "w": 3840,
-        "h": 2155
+        "h": 2160
       },
       "sourceSize": {
         "w": 3840,
@@ -122,8 +122,8 @@
     },
     "bg_Game4": {
       "frame": {
-        "x": 7680,
-        "y": 2155,
+        "x": 3840,
+        "y": 2160,
         "w": 3840,
         "h": 2160
       },
@@ -146,18 +146,18 @@
     },
     "bg_Game5": {
       "frame": {
-        "x": 3840,
+        "x": 7680,
         "y": 2160,
         "w": 3840,
-        "h": 2160
+        "h": 2159
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
         "x": 0,
-        "y": 0,
+        "y": 1,
         "w": 3840,
-        "h": 2160
+        "h": 2159
       },
       "sourceSize": {
         "w": 3840,
@@ -195,7 +195,7 @@
     "bg_Menu": {
       "frame": {
         "x": 7680,
-        "y": 4315,
+        "y": 4319,
         "w": 3840,
         "h": 2160
       },

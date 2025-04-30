@@ -4,20 +4,20 @@
       "frame": {
         "x": 0,
         "y": 0,
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "sourceSize": {
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -26,22 +26,22 @@
     },
     "game2": {
       "frame": {
-        "x": 719,
+        "x": 1995,
         "y": 0,
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "sourceSize": {
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -51,21 +51,21 @@
     "game3": {
       "frame": {
         "x": 0,
-        "y": 253,
-        "w": 719,
-        "h": 253
+        "y": 701,
+        "w": 1995,
+        "h": 701
       },
       "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "sourceSize": {
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -74,22 +74,22 @@
     },
     "game4": {
       "frame": {
-        "x": 719,
-        "y": 253,
-        "w": 719,
-        "h": 253
+        "x": 1995,
+        "y": 701,
+        "w": 1995,
+        "h": 700
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 700
       },
       "sourceSize": {
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -98,22 +98,22 @@
     },
     "game5": {
       "frame": {
-        "x": 0,
-        "y": 506,
-        "w": 719,
-        "h": 253
+        "x": 1995,
+        "y": 1401,
+        "w": 1995,
+        "h": 700
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 700
       },
       "sourceSize": {
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -122,22 +122,22 @@
     },
     "game6": {
       "frame": {
-        "x": 719,
-        "y": 506,
-        "w": 719,
-        "h": 253
+        "x": 0,
+        "y": 1402,
+        "w": 1995,
+        "h": 700
       },
       "rotated": false,
-      "trimmed": false,
+      "trimmed": true,
       "spriteSourceSize": {
         "x": 0,
         "y": 0,
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 700
       },
       "sourceSize": {
-        "w": 719,
-        "h": 253
+        "w": 1995,
+        "h": 701
       },
       "pivot": {
         "x": 0.5,
@@ -149,8 +149,8 @@
     "image": "game_btns.png",
     "format": "RGBA8888",
     "size": {
-      "w": 1438,
-      "h": 759
+      "w": 3990,
+      "h": 2102
     },
     "scale": 1
   }

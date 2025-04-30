@@ -10,29 +10,31 @@ export default class Game6 extends BaseScene {
   create() {
     this.setSceneShow();
     this.setBackground(`bg_${this.scene.key}`);
-    this.setGuideAudio();
+    if (!this.firstGuidePlayed) this.setGuideAudio();
+    this.firstGuidePlayed = true;
     this.setBackMenuButton();
-    this.setInteractiveArea(1, 1.1, .9, .72);
+    this.setInteractiveArea(1, 1.1, .8, .72);
     const { x, y, width: w, height: h } = this.interactiveArea;
     // 建立食物餐盤
     this.plate = this.add.image(x * .75, y, 'plateFull');
-    this.fitImageElement(this.plate, w * .7, h);
+    this.fitImageElement(this.plate, { maxWidth: w * .7, maxHeight: h });
     this.allocationFoods({ usePlateRestriction: true });
     this.setRegion();
     this.setPositionMap();
-    this.setFoodCabinet(x * 1.6, y, w * .3, h, this.foodTypeRegions, this.positionMapping);
+    this.setFoodCabinet(x * 1.6, y, w * .3, h, this.foodTypeRegions, this.positionMapping, .13);
   }
   // ********** 方法 ********** //
   setRegion() { // 建立分類區域
-    const { x, y, width: w, height: h } = this.interactiveArea;
+    const { width: w, height: h } = this.interactiveArea;
+    const { x, y } = this.plate;
     const baseX = x - w / 2;
     const regionConfigs = [
-      { xRatio: .435, yRatio: 0.635, wRatio: .12, hRatio: .19 },
-      { xRatio: .275, yRatio: 1.068, wRatio: .12, hRatio: .85 },
-      { xRatio: .575, yRatio: 0.640, wRatio: .08, hRatio: .20 },
-      { xRatio: .500, yRatio: 1.446, wRatio: .25, hRatio: .28 },
-      { xRatio: .500, yRatio: 1.020, wRatio: .25, hRatio: .24 },
-      { xRatio: .117, yRatio: 1.068, wRatio: .12, hRatio: .85 },
+      { xRatio: .610, yRatio: 0.590, wRatio: .15, hRatio: .20 },
+      { xRatio: .424, yRatio: 1.045, wRatio: .15, hRatio: .90 },
+      { xRatio: .782, yRatio: 0.590, wRatio: .10, hRatio: .20 },
+      { xRatio: .685, yRatio: 1.452, wRatio: .30, hRatio: .27 },
+      { xRatio: .685, yRatio: 1.005, wRatio: .30, hRatio: .27 },
+      { xRatio: .238, yRatio: 1.045, wRatio: .15, hRatio: .90 },
     ];
     this.foodTypeRegions = regionConfigs.map(
       ({ xRatio, yRatio, wRatio, hRatio }, index) => {
@@ -50,29 +52,29 @@ export default class Game6 extends BaseScene {
   }
   setPositionMap() { // 定義特定放置位置
     const positionOffsets = {
-      nut: [{ x: -0.075, y: -0.21, sizeMulti: 0.3 }],
+      nut: [{ x: -0.075, y: -0.18, sizeMulti: 0.3 }],
       vegetable: [
         { y: -0.03 },
-        { y: 0.175 },
-        { y: 0.38 }
+        { y: 0.17 },
+        { y: 0.37 }
       ],
       dairy: [
-        { y: -0.25, sizeMulti: 0.3 },
-        { y: 0.2, sizeMulti: 0.3 }
+        { x: 0.12, y: 0.16, sizeMulti: 0.3 },
+        { x: -0.2, y: -0.2, sizeMulti: 0.3 }
       ],
       fruit: [
-        { x: -0.22, y: 0.1 },
-        { x: 0.15, y: 0.1 }
+        { x: -0.22, y: 0.18 },
+        { x: 0.23, y: 0.18 }
       ],
       meat: [
-        { y: 0.2, x: -0.3 },
+        { y: 0.2, x: -0.333 },
         { y: 0.2 },
-        { y: 0.2, x: 0.3 }
+        { y: 0.2, x: 0.333 }
       ],
       grain: [
         { y: -0.03 },
-        { y: 0.175 },
-        { y: 0.38 }
+        { y: 0.17 },
+        { y: 0.37 }
       ],
     };
     this.positionMapping = [];
@@ -82,7 +84,7 @@ export default class Game6 extends BaseScene {
         ({ x: ox = 0, y: oy = 0, sizeMulti }) => {
           const px = x + ox * w;
           const py = y + oy * h;
-          if (this.DEV_MODE) { // Debug: 用小方塊可視化這個位置
+          if (DEV_MODE) { // Debug: 用小方塊可視化這個位置
             const fakeElement = this.add.rectangle(px, py, 100, 100);
             this.setDevTest(fakeElement, { color: 0xaa00aa });
           }

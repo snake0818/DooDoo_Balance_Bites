@@ -8,7 +8,8 @@ export default class Game5 extends BaseScene {
   create() {
     this.setSceneShow();
     this.setBackground(`bg_${this.scene.key}`);
-    this.setGuideAudio();
+    if (!this.firstGuidePlayed) this.setGuideAudio();
+    this.firstGuidePlayed = true;
     this.setBackMenuButton();
     this.setInteractiveArea(.75, 1.1, .65, .72);
     const { x, y, width: w, height: h } = this.interactiveArea;
@@ -19,13 +20,14 @@ export default class Game5 extends BaseScene {
   // ********** 方法 ********** //
   setRegion() { // 建立分類區域
     const { x, y, width: w, height: h } = this.interactiveArea;
-    const [regionW, regionH] = [w * .32, h * .33];
+    const [regionW, regionH] = [w * .33, h * .33];
     const [dW, dH] = [.5 * (w - regionW), regionH + .005 * h];
     this.colorSetRegions = colorSets.map((type, index) => {
       const rx = x + (index % 2 ? dW : -dW);
       const ry = y + (Math.floor(index / 2) - 1) * dH;
       const region = this.add.image(rx, ry, 'REGIONS', `${type}2`);
       region.setData('type', type);
+      this.fitImageElement(region, { maxWidth: regionW, maxHeight: regionH });
       this.setDevTest(region);
       region.setInteractive(pixelExactConfig)
         .on('pointerdown', () => this.setAudio(`color_${type}`));

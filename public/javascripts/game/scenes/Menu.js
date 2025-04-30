@@ -17,11 +17,12 @@ export default class Menu extends BaseScene {
   }
   // ********** 方法 ********** //
   waitForUserToStart() { // 初次進入首頁之引導動作
-    const { cX, cY } = this.view;
+    const { cX, cY, W, H } = this.view;
     const background = this.add.image(cX, cY, 'bg_start').setDepth(-1);
     this.setGuideAudio('audio_start');
     // 建立'開始遊戲'按鈕
-    const btn_game_start = this.add.image(cX, cY * 1.5, 'BTNS', 'game_start');
+    const btn_game_start = this.add.image(cX, cY * 1.45, 'BTNS', 'game_start');
+    this.fitImageElement(btn_game_start, { maxWidth: W * 0.15 });
     const setStartButton = (resolve) => {
       btn_game_start.setInteractive(pixelExactConfig)
         .once('pointerup', () => {
@@ -52,6 +53,7 @@ export default class Menu extends BaseScene {
           this.CurrentGamingID = `Game${gameNumber}`;
           this.scene.start(this.CurrentGamingID);
         });
+      this.fitImageElement(region, { maxWidth: btnW, maxHeight: btnH });
       this.setDevTest(region);
     }
   }

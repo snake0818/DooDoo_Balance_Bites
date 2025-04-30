@@ -9,7 +9,8 @@ export default class Game3 extends BaseScene {
   create() {
     this.setSceneShow();
     this.setBackground(`bg_${this.scene.key}`);
-    this.setGuideAudio();
+    if (!this.firstGuidePlayed) this.setGuideAudio();
+    this.firstGuidePlayed = true;
     this.setBackMenuButton();
     this.allocationFoods({ count: 10 });
     this.setRhymeList();
@@ -17,9 +18,11 @@ export default class Game3 extends BaseScene {
   // ********** 方法 ********** //
   setRhymeList() {
     const { cX, cY, W, H } = this.view;
+    const rect = this.add.rectangle(cX, cY, W, H, 0x0, 0).setInteractive().setDepth(-10);
     // 唸謠表
-    const Rhymes = this.add.image(cX, cY, 'RHYME_LISTS', 'rhyme_list');
-    this.fitImageElement(Rhymes, W * .45, H * .5);
+    const Rhymes = this.add.image(cX, cY * .97, 'RHYME_LISTS', 'rhyme_list0');
+    this.fitImageElement(Rhymes, { maxWidth: W * .45, maxHeight: H * .5 });
+    this.setDevTest(Rhymes, { isRelationship: true });
 
     const btn_W = W * .158;
     const btn_H = H * .19;
@@ -30,13 +33,13 @@ export default class Game3 extends BaseScene {
       { time: 203, frame: 4 },
       { time: 248, frame: 5 },
       { time: 292, frame: 6 },
-      { time: 337 },
+      { time: 337, frame: 0 },
     ];
     let isRhymePlaying = false;
 
     // 建立唸謠表導讀播放按鈕
     const btn_play_rhyme = this.add.image(cX * .82, cY * 1.63, 'BTNS', 'play_rhyme');
-    this.fitImageElement(btn_play_rhyme, btn_W, btn_H);
+    this.fitImageElement(btn_play_rhyme, { maxWidth: btn_W, maxHeight: btn_H });
     btn_play_rhyme.setInteractive(pixelExactConfig).on('pointerdown', () => {
       if (isRhymePlaying) return;
       isRhymePlaying = true;
@@ -52,7 +55,9 @@ export default class Game3 extends BaseScene {
         if (this.time.now - lastUpdateTime < updateInterval) return;
         lastUpdateTime = this.time.now;
         // 依播放進度更換唸謠表
-        const currentTime = Math.floor(this.audio.seek * 10);
+        const seek = this.audio.seek;
+        if (!seek) return;
+        const currentTime = Math.floor(seek * 10);
         const nextCue = rhymeTimeline[currentIndex];
         if (nextCue && currentTime >= nextCue.time && nextCue.frame !== lastFrame) {
           Rhymes.setTexture('RHYME_LISTS', `rhyme_list${nextCue.frame}`);
@@ -61,14 +66,21 @@ export default class Game3 extends BaseScene {
         }
       }
       this.setAudio('rhyme_list', {
-        concurrent: () => this.events.on('update', rhymePlay),
-        subsequent: () => this.events.off('update', rhymePlay)
+        concurrent: () => {
+          rect.setDepth(999);
+          this.events.on('update', rhymePlay);
+        },
+        subsequent: () => {
+          rect.setDepth(-10);
+          isRhymePlaying = false;
+          this.events.off('update', rhymePlay);
+        }
       });
     });
     this.setDevTest(btn_play_rhyme, { isRelationship: true });
     // 建立開始遊玩按鈕
     const btn_play = this.add.image(cX * 1.18, cY * 1.63, 'BTNS', 'game_play');
-    this.fitImageElement(btn_play, btn_W, btn_H);
+    this.fitImageElement(btn_play, { maxWidth: btn_W, maxHeight: btn_H });
     btn_play.setInteractive(pixelExactConfig).once('pointerdown', () => {
       this.interruptCurrentAudio();
       this.setBackground(`bg_${this.scene.key}_1`);
@@ -93,15 +105,15 @@ export default class Game3 extends BaseScene {
     const btn_W = W * .158;
     const btn_H = H * .19;
     var currentStageNum = 0; // 當前關卡變數
-    this.rhymeImage = this.add.image(cX, cY * 1.19);
-    this.fitImageElement(this.rhymeImage, W * .35, H * .045);
+    this.rhymeImage = this.add.image(cX, cY * 1.12);
+    this.fitImageElement(this.rhymeImage, { maxHeight: H * .0055 });
     this.foodImage = this.add.image(cX, cY * .7);
-    this.fitImageElement(this.foodImage, H * .02, H * .02);
+    this.fitImageElement(this.foodImage, { maxHeight: H * .02 });
     setStage(); // 初次執行
 
     // 建立顯示解答按鈕
     const answer = this.add.image(cX * .82, cY * 1.5, 'BTNS', 'answer');
-    this.fitImageElement(answer, btn_W, btn_H);
+    this.fitImageElement(answer, { maxWidth: btn_W, maxHeight: btn_H });
     answer.setInteractive(pixelExactConfig).on('pointerdown', () => {
       this.rhymeImage.setVisible(true);
       this.setAudio(this.rhymeImage.audioKey);
@@ -110,8 +122,9 @@ export default class Game3 extends BaseScene {
 
     // 建立進入下一關按鈕
     const next = this.add.image(cX * 1.18, cY * 1.5, 'BTNS', 'next');
-    this.fitImageElement(next, btn_W, btn_H);
+    this.fitImageElement(next, { maxWidth: btn_W, maxHeight: btn_H });
     next.setInteractive(pixelExactConfig).on('pointerdown', () => {
+      this.interruptCurrentAudio();
       // 檢測是否完成所有關卡
       if (currentStageNum >= this.foodList.length) {
         answer.destroy();

@@ -9,27 +9,30 @@ export default class Game2 extends BaseScene {
   create() {
     this.setSceneShow();
     this.setBackground(`bg_${this.scene.key}`);
-    this.setGuideAudio();
+    if (!this.firstGuidePlayed) this.setGuideAudio();
+    this.firstGuidePlayed = true;
     this.setBackMenuButton();
-    this.setInteractiveArea(1, 1.1, .9, .72);
+    this.setInteractiveArea(1, 1.1, .8, .72);
     const { x, y, width: w, height: h } = this.interactiveArea;
+    // 建立食物餐盤
     this.plate = this.add.image(x * .75, y, 'plateType');
-    this.fitImageElement(this.plate, w * .7, h);
+    this.fitImageElement(this.plate, { maxWidth: w * .7, maxHeight: h });
     this.allocationFoods();
     this.setRegion();
-    this.setFoodCabinet(x * 1.6, y, w * .3, h, this.foodTypeRegions);
+    this.setFoodCabinet(x * 1.57, y, w * .3, h, this.foodTypeRegions);
   }
   // ********** 方法 ********** //
   setRegion() { // 建立分類區域
-    const { x, y, width: w, height: h } = this.interactiveArea;
+    const { width: w, height: h } = this.interactiveArea;
+    const { x, y } = this.plate;
     const baseX = x - w / 2;
     const regionConfigs = [
-      { xRatio: .434, yRatio: 0.640, wRatio: .13, hRatio: .20 },
-      { xRatio: .274, yRatio: 1.068, wRatio: .12, hRatio: .85 },
-      { xRatio: .574, yRatio: 0.640, wRatio: .08, hRatio: .20 },
-      { xRatio: .498, yRatio: 1.446, wRatio: .25, hRatio: .28 },
-      { xRatio: .498, yRatio: 1.020, wRatio: .25, hRatio: .24 },
-      { xRatio: .118, yRatio: 1.068, wRatio: .12, hRatio: .85 },
+      { xRatio: .610, yRatio: 0.590, wRatio: .15, hRatio: .20 },
+      { xRatio: .424, yRatio: 1.045, wRatio: .15, hRatio: .90 },
+      { xRatio: .782, yRatio: 0.590, wRatio: .10, hRatio: .20 },
+      { xRatio: .685, yRatio: 1.452, wRatio: .30, hRatio: .27 },
+      { xRatio: .685, yRatio: 1.005, wRatio: .30, hRatio: .27 },
+      { xRatio: .238, yRatio: 1.045, wRatio: .15, hRatio: .90 },
     ];
     this.foodTypeRegions = regionConfigs.map(
       ({ xRatio, yRatio, wRatio, hRatio }, index) => {

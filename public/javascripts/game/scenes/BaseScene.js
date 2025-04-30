@@ -83,8 +83,8 @@ export default class BaseScene extends Phaser.Scene {
         path: '/',
         files: {
           foodCabinet: 'foodCabinet',
-          correct: 'correct',
-          wrong: 'wrong',
+          correct: 'sign_correct',
+          wrong: 'sign_wrong',
           plateType: 'plate_type',
           plateFull: 'plate_full'
         }
@@ -192,7 +192,7 @@ export default class BaseScene extends Phaser.Scene {
       element.height,
       debugColor,
       debugAlpha
-    ).setOrigin(0.5);
+    ).setOrigin(0.5).setScale(element._scaleX, element._scaleY);
     this.children.moveBelow(debugRect, element); // 放在 element 底下
     this.#_debugRects ??= [];
     this.#_debugRects.push(debugRect);
@@ -249,7 +249,8 @@ export default class BaseScene extends Phaser.Scene {
   }
   setBackMenuButton() {
     const { W, H } = this.view;
-    const backButton = this.add.image(W * .07, H * .135, 'BTNS', 'back').setOrigin(0.5)
+    const backButton = this.add.image(W * .07, H * .135, 'BTNS', 'back').setOrigin(0.5);
+    this.fitImageElement(backButton, { maxWidth: W * .07 });
     this.setDevTest(backButton);
     backButton.setInteractive(pixelExactConfig)
       .once('pointerdown', () => {
@@ -260,34 +261,35 @@ export default class BaseScene extends Phaser.Scene {
       });
     this.backButton = backButton;
   }
-  setFoodCabinet(X, Y, Width, Height, Regions, PosMapping = null) {
+  setFoodCabinet(X, Y, Width, Height, Regions, PosMapping = null, FoodSizeRatio = 0.15) {
     // 建立食物櫃
     const cabinet = this.add.image(X, Y, 'foodCabinet')
-    this.fitImageElement(cabinet, Width, Height);
+    this.fitImageElement(cabinet, { maxWidth: Width, maxHeight: Height });
     this.foodCabinet = cabinet;
     // 放置食物
     const { x, y, width: w, height: h } = cabinet;
     const numRows = 4; // 常數為食物櫃總列數(依素材)
     const numCols = Math.ceil(this.foodList.length / numRows); // 每行食物數量
-    const foodSize = h * .15;
+    const foodSize = h * FoodSizeRatio;
     // 計算食物之間的間距
     const colGap = Math.floor((w - foodSize * numCols) / (numCols + 1));
     const rowGap = Math.floor((h - foodSize * numRows) / (numRows + 1));
     // 整體區塊的起始位置（置中）
     const totalFoodWidth = foodSize * numCols + colGap * (numCols - 1);
     const totalFoodHeight = foodSize * numRows + rowGap * (numRows - 1);
-    const startX = Math.floor(x - totalFoodWidth / 2 + foodSize / 2);
+    const SD = 0.15 - FoodSizeRatio;
+    const startX = Math.floor(x - totalFoodWidth / 2 + foodSize / (2 - SD * 30));
     const startY = Math.floor(y - totalFoodHeight / 2 + foodSize / 2);
     this.foodList.forEach((foodKey, index) => {
       const row = index % numRows;
       const col = Math.floor(index / numRows);
-      const foodX = startX + col * (foodSize + colGap);
-      const foodY = startY + row * (foodSize + rowGap);
+      const foodX = startX + col * (foodSize + colGap) * (1 - SD * 7);
+      const foodY = startY + row * (foodSize + rowGap) * .95;
       const food = this.add.image(foodX, foodY, `${this.getCategory(foodKey).toUpperCase()}`, foodKey);
       food.setData('type', this.getCategory(foodKey, this.mode));
       food.prevX = food.x;
       food.prevY = food.y;
-      this.fitImageElement(food, foodSize, foodSize);
+      this.fitImageElement(food, { maxWidth: foodSize });
       food.setInteractive(pixelExactConfig);
       this.input.setDraggable(food);
       this.setDevTest(food);
@@ -332,7 +334,7 @@ export default class BaseScene extends Phaser.Scene {
     const { cX, cY, W, H } = this.view;
     const rect = this.add.rectangle(cX, cY, W, H, 0x0, .5).setInteractive();
     const result = this.add.image(cX, cY, keyword);
-    this.fitImageElement(result, W, H);
+    this.fitImageElement(result, { maxHeight: H });
     const fadeIn = () => { // 淡入效果
       const tweenIn = this.tweens.add({
         targets: result,
@@ -377,7 +379,7 @@ export default class BaseScene extends Phaser.Scene {
     this.audio.destroy();
     this.audioSTATUS = false;
   }
-  fitImageElement(imageElement, maxWidth, maxHeight, allowScaleUp = true) {
+  fitImageElement(imageElement, { maxWidth, maxHeight, allowScaleUp = true }) {
     const frame = imageElement.frame;
     const isFromAtlas = frame.name !== imageElement.texture.key;
     // 來自 atlas 使用 frame，否則單張圖片使用 getSourceImage()

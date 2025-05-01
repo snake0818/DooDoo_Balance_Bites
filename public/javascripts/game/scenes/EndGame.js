@@ -4,7 +4,9 @@ export default class EndGame extends BaseScene {
     super({ key: 'EndGame' });
   }
   preload() { this.initializeLoad(); }
-  init(data) { this.CurrentGamingID = data.CurrentGamingID || 'Menu'; }
+  init({ CurrentGamingID = 'Menu' }) {
+    this.CurrentGamingID = CurrentGamingID;
+  }
   create() {
     const { cX, cY, W, H } = this.view;
     this.setBackground('bg_End');

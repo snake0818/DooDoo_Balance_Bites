@@ -27,13 +27,13 @@
     <div class="alert alert-warning">
       <div class="row">
         <div class="col-3  text-center">
-          <text><b>遊戲編號</b></text>
+          <text><b>遊戲編號(名稱)</b></text>
         </div>
         <div class="col-3  text-center">
-          <text><b>錯誤次數</b></text>
+          <text><b>錯誤次數(次)</b></text>
         </div>
         <div class="col-3 text-center">
-          <text><b>遊玩時間</b></text>
+          <text><b>遊玩時間(ms)</b></text>
         </div>
         <div class="col-3 text-center">
           <text><b>建立時間</b></text>
@@ -47,7 +47,12 @@
 
 <script src="./public/javascripts/gameRecord.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => { getItemList(); });
+  // 顯示所有紀錄項目
+  document.addEventListener('DOMContentLoaded', () => {
+    const data = getAllRecords();
+    if (!data.length) return;
+    data.forEach(item => $('body').append(newItem(item)));
+  });
 </script>
 
 </html>

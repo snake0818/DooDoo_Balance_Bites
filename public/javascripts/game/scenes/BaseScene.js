@@ -14,6 +14,7 @@ export default class BaseScene extends Phaser.Scene {
     this.foodCabinet = null;
     // ********** 紀錄用 ********** //
     this.CurrentGamingID = null;
+    this.StartTime = null;
   }
   // ********** 快取用 ********** //
   #_cachedView = null;
@@ -243,9 +244,13 @@ export default class BaseScene extends Phaser.Scene {
   }
   setGuideAudio(GuideAudioKey = `audio_${this.scene.key}`) {
     const { cX, cY, W, H } = this.view;
-    const rect = this.add.rectangle(cX, cY, W, H, 0x0, 0).setDepth(10);
-    if (!DEV_MODE) rect.setInteractive();
-    this.setAudio(GuideAudioKey, { subsequent: () => rect.destroy() });
+    const rect = !DEV_MODE ? this.add.rectangle(cX, cY, W, H, 0x0, 0).setDepth(10).setInteractive() : null;
+    this.setAudio(GuideAudioKey, {
+      subsequent: () => {
+        rect?.destroy();
+        this.StartTime = this.time.now;
+      }
+    });
   }
   setBackMenuButton() {
     const { W, H } = this.view;
@@ -295,6 +300,8 @@ export default class BaseScene extends Phaser.Scene {
       this.setDevTest(food);
     });
     this.setFoodDragEvent(Regions, PosMapping);
+
+    this.StartTime = this.time.now;
   }
   setFoodDragEvent(regions, posMapping = null) {
     this.input
@@ -365,11 +372,18 @@ export default class BaseScene extends Phaser.Scene {
     });
   }
   setEndGameView() {
+    // 紀錄
+    const record = {
+      gameID: this.CurrentGamingID,
+      wrong: NumOfError,
+      playedTime: this.time.now - this.StartTime
+    }
+    storageRecord(record);
     // 清除資料
     NumOfError = 0;
     NumOfCorrect = 0;
     // 切換至遊戲結束場景
-    this.scene.start('EndGame', { CurrentGamingID: this.scene.key });
+    this.scene.start('EndGame', { CurrentGamingID: this.CurrentGamingID });
   }
 
   // ******************** 功能 ******************** //

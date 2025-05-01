@@ -92,6 +92,8 @@ export default class Game3 extends BaseScene {
     this.setDevTest(btn_play, { isRelationship: true });
   }
   setPlaying() {
+    this.StartTime = this.time.now;
+    
     const { cX, cY, W, H } = this.view;
 
     const setStage = () => { // 關卡內容設置

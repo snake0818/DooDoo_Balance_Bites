@@ -48,6 +48,7 @@ export default class Menu extends BaseScene {
         .setInteractive(pixelExactConfig)
         .on('pointerover', () => this.setAudio(`audio_title${gameNumber}`))
         .on('pointerout', () => this.interruptCurrentAudio())
+        .on('pointerup', () => this.interruptCurrentAudio())
         .on('pointerdown', () => {
           this.interruptCurrentAudio();
           this.CurrentGamingID = `Game${gameNumber}`;

@@ -100,17 +100,6 @@ export default class BaseScene extends Phaser.Scene {
   preloadAudio() {
     if (DEV_MODE) console.log('Load Audios.');
     const Audio = {
-      title: {
-        path: '/titles/',
-        files: {
-          audio_title1: 'game_title1',
-          audio_title2: 'game_title2',
-          audio_title3: 'game_title3',
-          audio_title4: 'game_title4',
-          audio_title5: 'game_title5',
-          audio_title6: 'game_title6'
-        }
-      },
       guide: {
         path: '/guides/',
         files: {

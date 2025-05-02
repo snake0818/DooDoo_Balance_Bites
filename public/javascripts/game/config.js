@@ -18,10 +18,6 @@ const config = {
   backgroundColor: '#fff',
   // 縮放模式
   scale: { mode: Phaser.Scale.FIT },
-  // 禁用 Web Audio API，改用 HTML5 Audio
-  audio: { disableWebAudio: true },
-  // 防止切換視窗時自動暫停遊戲／聲音
-  disablePauseOnBlur: true,
   // 場景
   scene: [
     Menu,
@@ -35,3 +31,11 @@ const config = {
   ]
 }
 const game = new Phaser.Game(config);
+
+// 檢查頁面是否被遮擋
+document.addEventListener('visibilitychange', function () {
+  // 當頁面被遮擋時暫停遊戲
+  if (document.hidden) game.paused = true;
+  // 當頁面恢復可見時繼續遊戲
+  else game.paused = false;
+});

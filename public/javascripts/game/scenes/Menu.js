@@ -2,7 +2,7 @@ import BaseScene from './BaseScene.js';
 export default class Menu extends BaseScene {
   constructor() { super({ key: 'Menu' }) }
   preload() {
-    this.load.image('bg_start', `${PATH.UI}/bg_start.png`);
+    this.load.image('bg_start', `${PATH.UI}/bg_Start.png`);
     this.initializeLoad();
   }
   async create() {
@@ -16,14 +16,37 @@ export default class Menu extends BaseScene {
     this.firstGuidePlayed = true;
   }
   // ********** 方法 ********** //
-  waitForUserToStart() { // 初次進入首頁之引導動作
+  FirstInteract() {
     const { cX, cY, W, H } = this.view;
+    // 半透明黑底遮罩
+    const rect = this.add.rectangle(cX, cY, W, H, 0x0, 0.8);
+    // 提示文字
+    const startTextZh = this.add.text(cX, cY - H * .1, '\n點擊以開始遊戲', {
+      fontSize: H * .2, color: '#ffffff', align: 'center'
+    }).setOrigin(0.5);
+    const startTextEn = this.add.text(cX, cY + H * .1, '\nClick to start', {
+      fontSize: H * .1, color: '#ffffff', align: 'center'
+    }).setOrigin(0.5);
+    return new Promise(resolve => {
+      rect.setInteractive()
+        .once('pointerup', () => {
+          rect.destroy();
+          startTextZh.destroy();
+          startTextEn.destroy();
+          resolve();
+        });
+    })
+  }
+  async waitForUserToStart() { // 初次進入首頁之引導動作
+    const { cX, cY, W } = this.view;
     const background = this.add.image(cX, cY, 'bg_start').setDepth(-1);
+    await this.FirstInteract(); // 首此點擊事件，防止網頁阻擋音效播放
     this.setGuideAudio('audio_start');
     // 建立'開始遊戲'按鈕
     const btn_game_start = this.add.image(cX, cY * 1.45, 'BTNS', 'game_start');
     this.fitImageElement(btn_game_start, { maxWidth: W * 0.15 });
-    const setStartButton = (resolve) => {
+    // 傳入 resolve，點擊後觸發
+    return new Promise(resolve => {
       btn_game_start.setInteractive(pixelExactConfig)
         .once('pointerup', () => {
           this.interruptCurrentAudio();
@@ -32,9 +55,7 @@ export default class Menu extends BaseScene {
           resolve(); // 通知繼續
         });
       this.setDevTest(btn_game_start, { isRelationship: true });
-    };
-    // 傳入 resolve，點擊後觸發
-    return new Promise(resolve => setStartButton(resolve));
+    });
   }
   setMenuRegion() { // 建立各按鈕並設置其滑鼠互動事件
     const { x, y, width: w, height: h } = this.interactiveArea;
@@ -46,9 +67,6 @@ export default class Menu extends BaseScene {
       const gameNumber = i + 1;
       const region = this.add.image(rx, ry, 'GAME_BTNS', `game${gameNumber}`)
         .setInteractive(pixelExactConfig)
-        .on('pointerover', () => this.setAudio(`audio_title${gameNumber}`))
-        .on('pointerout', () => this.interruptCurrentAudio())
-        .on('pointerup', () => this.interruptCurrentAudio())
         .on('pointerdown', () => {
           this.interruptCurrentAudio();
           this.CurrentGamingID = `Game${gameNumber}`;

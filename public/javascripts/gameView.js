@@ -2,25 +2,47 @@
 ['gesturestart', 'dblclick'].forEach(event => document.addEventListener(event, (e) => e.preventDefault()));
 
 // 全螢幕
+const isFullscreenSupported = (() => {
+  const el = document.documentElement;
+  return !!(el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen);
+})();
 const Fullscreen = {
+  isSupported: isFullscreenSupported,
   isActive: () => !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement),
   enter: () => {
-    if (!Fullscreen.isActive()) {
+    if (Fullscreen.isSupported && !Fullscreen.isActive()) {
       const el = document.documentElement;
-      (el.requestFullscreen?.() || el.webkitRequestFullscreen?.() || el.msRequestFullscreen?.())
-        ?.catch(err => console.warn('進入全螢幕失敗:', err));
+      const promise = el.requestFullscreen?.() || el.webkitRequestFullscreen?.() || el.msRequestFullscreen?.();
+      if (promise instanceof Promise) promise.catch(err => console.warn('進入全螢幕失敗:', err));
     }
   },
   exit: () => {
-    if (Fullscreen.isActive())
-      (document.exitFullscreen?.() || document.webkitExitFullscreen?.() || document.msExitFullscreen?.())
-        ?.catch(err => console.warn('退出全螢幕失敗:', err));
+    if (Fullscreen.isSupported && Fullscreen.isActive()) {
+      const promise = document.exitFullscreen?.() || document.webkitExitFullscreen?.() || document.msExitFullscreen?.();
+      if (promise instanceof Promise) promise.catch(err => console.warn('退出全螢幕失敗:', err));
+    }
+  },
+  toggle: () => {
+    if (Fullscreen.isSupported) {
+      Fullscreen.isActive() ? Fullscreen.exit() : Fullscreen.enter();
+    }
   }
 }
+
 // 判斷
 const Env = {
-  isInsufficientWidth: () => window.innerWidth < 768,
+  isInsufficient: () => window.innerWidth < 1024 || window.innerHeight < 512,
   isPortrait: () => window.matchMedia('(orientation: portrait)').matches
+}
+
+// 防抖函式
+function debounce(func, delay) {
+  let timeout;
+  return function () {
+    const context = this, args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), delay);
+  };
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navbar: $('nav'),
     container: $('#gameContainer'),
     app: $('#app'),
-    game: $('#app canvas'),
+    game: $('#app canvas')
   };
 
   // 畫面提示與調整
@@ -56,7 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const update = () => {
-      const isNarrow = Env.isInsufficientWidth();
+      const isNarrow = Env.isInsufficient();
+      if (Env.isPortrait() || !isNarrow) {
+        DOM.navbar && (DOM.navbar.style.display = '');
+        DOM.container && (DOM.container.style.paddingTop = '');
+      } else {
+        DOM.navbar && (DOM.navbar.style.display = 'none');
+        DOM.container && (DOM.container.style.paddingTop = '0px');
+      }
       if (
         (Env.isPortrait() && isNarrow) ||
         (!Fullscreen.isActive() && isNarrow && DOM.game.offsetWidth < window.innerWidth)
@@ -65,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const init = () => {
-      ['DOMContentLoaded', 'orientationchange', 'resize'].forEach(evt => window.addEventListener(evt, update));
+      ['DOMContentLoaded', 'orientationchange', 'resize'].forEach(evt => window.addEventListener(evt, debounce(update, 100)));
       DOM.warning?.addEventListener('click', onHintClick);
     };
 

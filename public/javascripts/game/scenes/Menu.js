@@ -2,7 +2,7 @@ import BaseScene from './BaseScene.js';
 export default class Menu extends BaseScene {
   constructor() { super({ key: 'Menu' }) }
   preload() {
-    this.load.image('bg_start', `${PATH.UI}/bg_Start.png`);
+    this.load.image('bg_start', `${PATH.UI}/bg_start.png`);
     this.initializeLoad();
   }
   async create() {

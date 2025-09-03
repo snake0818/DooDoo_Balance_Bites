@@ -1,9 +1,33 @@
 {
   "frames": {
-    "rhyme_nut": {
+    "rhyme_vegetable": {
       "frame": {
         "x": 0,
         "y": 0,
+        "w": 3187,
+        "h": 496
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 86,
+        "y": 13,
+        "w": 3187,
+        "h": 496
+      },
+      "sourceSize": {
+        "w": 3334,
+        "h": 528
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "rhyme_nut": {
+      "frame": {
+        "x": 0,
+        "y": 496,
         "w": 3160,
         "h": 446
       },
@@ -24,10 +48,34 @@
         "y": 0.5
       }
     },
+    "rhyme_dairy": {
+      "frame": {
+        "x": 0,
+        "y": 942,
+        "w": 3142,
+        "h": 465
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 131,
+        "y": 32,
+        "w": 3142,
+        "h": 465
+      },
+      "sourceSize": {
+        "w": 3334,
+        "h": 528
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
     "rhyme_meat": {
       "frame": {
         "x": 0,
-        "y": 446,
+        "y": 1407,
         "w": 3139,
         "h": 462
       },
@@ -51,7 +99,7 @@
     "rhyme_fruit": {
       "frame": {
         "x": 0,
-        "y": 908,
+        "y": 1869,
         "w": 3136,
         "h": 506
       },
@@ -75,7 +123,7 @@
     "rhyme_grain": {
       "frame": {
         "x": 0,
-        "y": 1414,
+        "y": 2375,
         "w": 3121,
         "h": 478
       },
@@ -95,62 +143,14 @@
         "x": 0.5,
         "y": 0.5
       }
-    },
-    "rhyme_dairy": {
-      "frame": {
-        "x": 0,
-        "y": 1892,
-        "w": 3131,
-        "h": 459
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 142,
-        "y": 34,
-        "w": 3131,
-        "h": 459
-      },
-      "sourceSize": {
-        "w": 3334,
-        "h": 529
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    "rhyme_vegetable": {
-      "frame": {
-        "x": 0,
-        "y": 2351,
-        "w": 3164,
-        "h": 486
-      },
-      "rotated": false,
-      "trimmed": true,
-      "spriteSourceSize": {
-        "x": 109,
-        "y": 16,
-        "w": 3164,
-        "h": 486
-      },
-      "sourceSize": {
-        "w": 3334,
-        "h": 529
-      },
-      "pivot": {
-        "x": 0.5,
-        "y": 0.5
-      }
     }
   },
   "meta": {
     "image": "rhymes.png",
     "format": "RGBA8888",
     "size": {
-      "w": 3164,
-      "h": 2837
+      "w": 3187,
+      "h": 2853
     },
     "scale": 1
   }

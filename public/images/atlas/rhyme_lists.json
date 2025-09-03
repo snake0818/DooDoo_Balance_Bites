@@ -4,20 +4,20 @@
       "frame": {
         "x": 0,
         "y": 0,
-        "w": 2882,
-        "h": 2825
+        "w": 2966,
+        "h": 2897
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 181,
-        "y": 141,
-        "w": 2882,
-        "h": 2825
+        "x": 0,
+        "y": 0,
+        "w": 2966,
+        "h": 2897
       },
       "sourceSize": {
-        "w": 3237,
-        "h": 3238
+        "w": 2966,
+        "h": 2897
       },
       "pivot": {
         "x": 0.5,
@@ -26,22 +26,22 @@
     },
     "rhyme_list5": {
       "frame": {
-        "x": 2882,
+        "x": 2966,
         "y": 0,
-        "w": 2882,
-        "h": 2825
+        "w": 2966,
+        "h": 2897
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 181,
-        "y": 141,
-        "w": 2882,
-        "h": 2825
+        "x": 0,
+        "y": 0,
+        "w": 2966,
+        "h": 2897
       },
       "sourceSize": {
-        "w": 3237,
-        "h": 3238
+        "w": 2966,
+        "h": 2897
       },
       "pivot": {
         "x": 0.5,
@@ -50,22 +50,22 @@
     },
     "rhyme_list4": {
       "frame": {
-        "x": 5764,
+        "x": 5932,
         "y": 0,
-        "w": 2881,
-        "h": 2825
+        "w": 2966,
+        "h": 2897
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 182,
-        "y": 141,
-        "w": 2881,
-        "h": 2825
+        "x": 0,
+        "y": 0,
+        "w": 2966,
+        "h": 2897
       },
       "sourceSize": {
-        "w": 3237,
-        "h": 3238
+        "w": 2966,
+        "h": 2897
       },
       "pivot": {
         "x": 0.5,
@@ -75,21 +75,21 @@
     "rhyme_list3": {
       "frame": {
         "x": 0,
-        "y": 2825,
-        "w": 2881,
-        "h": 2825
+        "y": 2897,
+        "w": 2966,
+        "h": 2897
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 182,
-        "y": 141,
-        "w": 2881,
-        "h": 2825
+        "x": 0,
+        "y": 0,
+        "w": 2966,
+        "h": 2897
       },
       "sourceSize": {
-        "w": 3237,
-        "h": 3238
+        "w": 2966,
+        "h": 2897
       },
       "pivot": {
         "x": 0.5,
@@ -98,22 +98,22 @@
     },
     "rhyme_list2": {
       "frame": {
-        "x": 2881,
-        "y": 2825,
-        "w": 2881,
-        "h": 2825
+        "x": 2966,
+        "y": 2897,
+        "w": 2966,
+        "h": 2897
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 182,
-        "y": 141,
-        "w": 2881,
-        "h": 2825
+        "x": 0,
+        "y": 0,
+        "w": 2966,
+        "h": 2897
       },
       "sourceSize": {
-        "w": 3237,
-        "h": 3238
+        "w": 2966,
+        "h": 2897
       },
       "pivot": {
         "x": 0.5,
@@ -122,22 +122,22 @@
     },
     "rhyme_list1": {
       "frame": {
-        "x": 5762,
-        "y": 2825,
-        "w": 2881,
-        "h": 2825
+        "x": 5932,
+        "y": 2897,
+        "w": 2966,
+        "h": 2897
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 182,
-        "y": 141,
-        "w": 2881,
-        "h": 2825
+        "x": 0,
+        "y": 0,
+        "w": 2966,
+        "h": 2897
       },
       "sourceSize": {
-        "w": 3237,
-        "h": 3238
+        "w": 2966,
+        "h": 2897
       },
       "pivot": {
         "x": 0.5,
@@ -147,21 +147,21 @@
     "rhyme_list0": {
       "frame": {
         "x": 0,
-        "y": 5650,
-        "w": 2883,
-        "h": 2825
+        "y": 5794,
+        "w": 2966,
+        "h": 2896
       },
       "rotated": false,
-      "trimmed": true,
+      "trimmed": false,
       "spriteSourceSize": {
-        "x": 182,
-        "y": 141,
-        "w": 2883,
-        "h": 2825
+        "x": 0,
+        "y": 0,
+        "w": 2966,
+        "h": 2896
       },
       "sourceSize": {
-        "w": 3237,
-        "h": 3238
+        "w": 2966,
+        "h": 2896
       },
       "pivot": {
         "x": 0.5,
@@ -173,8 +173,8 @@
     "image": "rhyme_lists.png",
     "format": "RGBA8888",
     "size": {
-      "w": 8645,
-      "h": 8475
+      "w": 8898,
+      "h": 8690
     },
     "scale": 1
   }

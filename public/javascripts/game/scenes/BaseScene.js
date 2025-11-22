@@ -367,7 +367,7 @@ export default class BaseScene extends Phaser.Scene {
       wrong: NumOfError,
       playedTime: this.time.now - this.StartTime
     }
-    storageRecord(record);
+    uploadNewRecord(record);
     // 清除資料
     NumOfError = 0;
     NumOfCorrect = 0;

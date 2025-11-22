@@ -16,19 +16,13 @@ function getAllRecords() {
 
 // 儲存一筆紀錄
 function uploadNewRecord(Data) {
-  fetch(APIurl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      gameId: Data.gameID,
-      errorCount: Data.wrong,
-      duration: Data.playedTime,
-      created: new Date().toISOString(),
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => console.log("上傳成功:", data))
-    .catch((err) => console.error("上傳失敗:", err));
+  const record = {
+    gameId: Data.gameID,
+    errorCount: Data.wrong,
+    duration: Data.playedTime,
+    created: new Date().toISOString(),
+  };
+  navigator.sendBeacon(APIurl, JSON.stringify(record));
 }
 
 // 建立遊玩紀錄項目

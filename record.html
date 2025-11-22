@@ -47,11 +47,8 @@
 
 <script src="./public/javascripts/gameRecord.js"></script>
 <script>
-  // 顯示所有紀錄項目
   document.addEventListener('DOMContentLoaded', () => {
-    const data = getAllRecords();
-    if (!data.length) return;
-    data.forEach(item => $('body').append(newItem(item)));
+    getAllRecords();
   });
 </script>
 

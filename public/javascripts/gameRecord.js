@@ -1,5 +1,5 @@
 const API_ID =
-  "AKfycbx1e5zJ11-VIEEtdAKAFaRsH1clK4yZq-d9Adsa_hFEHKovVPl-NZieMrKEaVJN-I5m";
+  "AKfycbzEwM0pk9sbNjFB5_fNHmwDdQQsJ741Jb7eO8-LyEsUo_vuavvShkTlDOydxozKM0S9";
 const APIurl = `https://script.google.com/macros/s/${API_ID}/exec`;
 
 // 取得所有紀錄並顯示所有紀錄項目

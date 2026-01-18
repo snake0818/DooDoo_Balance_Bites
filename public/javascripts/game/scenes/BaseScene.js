@@ -73,7 +73,7 @@ export default class BaseScene extends Phaser.Scene {
     categories.forEach(category => {
       this.load.atlas(
         category.toUpperCase(),
-        `${PATH.Atlas}/${category}.png`,
+        `${PATH.Atlas}/${category}.webp`,
         `${PATH.Atlas}/${category}.json`
       );
       if (DEV_MODE) console.log(`Load ${category} Atlas.`);
@@ -93,7 +93,7 @@ export default class BaseScene extends Phaser.Scene {
     };
     Object.values(UI).forEach(group => {
       Object.entries(group.files).forEach(([key, file]) => {
-        this.load.image(key, `${PATH.UI}${group.path}${file}.png`);
+        this.load.image(key, `${PATH.UI}${group.path}${file}.webp`);
       });
     });
   }
@@ -145,7 +145,7 @@ export default class BaseScene extends Phaser.Scene {
     }
     Object.values(Audio).forEach(group => {
       Object.entries(group.files).forEach(([key, file]) => {
-        this.load.audio(key, `${PATH.Audio}${group.path}${file}.m4a`);
+        this.load.audio(key, `${PATH.Audio}${group.path}${file}.ogg`);
       });
     });
   }

@@ -41,7 +41,7 @@ function newItem(item) {
         </div>
         <div class="col-3">
           <text class="created_at">${new Date(
-            item.建立時間
+            item.建立時間,
           ).toLocaleString()}</text>
         </div>
       <div>
@@ -50,12 +50,15 @@ function newItem(item) {
 }
 
 // 時間格式化
-function formatTime(ms) {
+function formatTime(s) {
+  const totalSeconds = Math.trunc(s);
+  const milliseconds = Math.round((s - totalSeconds) * 1000);
+
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
   const pad = (n, z = 2) => String(n).padStart(z, "0");
-  const hours = Math.floor(ms / 3600000);
-  const minutes = Math.floor((ms % 3600000) / 60000);
-  const seconds = Math.floor((ms % 60000) / 1000);
-  const milliseconds = Math.floor(ms % 1000);
   const timeStr =
     (hours > 0 ? `${pad(hours)}:` : "") +
     `${pad(minutes)}:${pad(seconds)}.${pad(milliseconds, 3)}`;
